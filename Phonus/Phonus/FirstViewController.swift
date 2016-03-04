@@ -9,7 +9,19 @@
 import UIKit
 
 class FirstViewController: UIViewController {
+    
+    @IBOutlet weak var nameInput: UITextField!
 
+    @IBOutlet weak var resultsLabel: UILabel!
+    
+    @IBOutlet weak var resultsSentLabel: UILabel!
+    
+   
+    @IBAction func sendInfo(sender: AnyObject) {
+        
+        //resultsSentLabel.text = nameInput.text
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
