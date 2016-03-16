@@ -8,28 +8,46 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+var name = ""
+
+class FirstViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var nameInput: UITextField!
-
-    @IBOutlet weak var resultsLabel: UILabel!
-    
-    @IBOutlet weak var resultsSentLabel: UILabel!
-    
    
     @IBAction func sendInfo(sender: AnyObject) {
         
-        //resultsSentLabel.text = nameInput.text
+        name = String(nameInput.text!)
+        
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //self.nameInput.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //close keyboard when touch outside the keyboard
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.view.endEditing(true)
+        
+    }
+    
+    //close keyboard with intro Key
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
     }
 
 
