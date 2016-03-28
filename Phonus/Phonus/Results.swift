@@ -11,11 +11,13 @@ import UIKit
 
 class TestResult: UIViewController {
     
+    @IBOutlet var resultsLabel: UILabel!
     @IBOutlet weak var message: UILabel!
     
     override func viewDidLayoutSubviews() {
 
         message.text = "Thanks for participating \(name). Your results have been sent."
+        resultsLabel.text = "\(hzResults) Hz"
         
     }
     
