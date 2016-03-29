@@ -15,6 +15,9 @@
 		8C34D75C1C778D72009DD596 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C34D75A1C778D72009DD596 /* LaunchScreen.storyboard */; };
 		8C34D7671C778D73009DD596 /* PhonusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34D7661C778D73009DD596 /* PhonusTests.swift */; };
 		8C34D7721C778D73009DD596 /* PhonusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C34D7711C778D73009DD596 /* PhonusUITests.swift */; };
+		F19F76921C98CE2E007D666B /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F76911C98CE2E007D666B /* Results.swift */; };
+		F19F76941C98DA63007D666B /* Students Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F76931C98DA63007D666B /* Students Results.swift */; };
+		F19F76961C98E111007D666B /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F76951C98E111007D666B /* TestController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		8C34D76D1C778D73009DD596 /* PhonusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhonusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C34D7711C778D73009DD596 /* PhonusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonusUITests.swift; sourceTree = "<group>"; };
 		8C34D7731C778D73009DD596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F19F76911C98CE2E007D666B /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
+		F19F76931C98DA63007D666B /* Students Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Students Results.swift"; sourceTree = "<group>"; };
+		F19F76951C98E111007D666B /* TestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +109,12 @@
 				8C34D7511C778D72009DD596 /* FirstViewController.swift */,
 				8C34D7531C778D72009DD596 /* SecondViewController.swift */,
 				8C34D7551C778D72009DD596 /* Main.storyboard */,
+				F19F76951C98E111007D666B /* TestController.swift */,
+				F19F76911C98CE2E007D666B /* Results.swift */,
 				8C34D7581C778D72009DD596 /* Assets.xcassets */,
 				8C34D75A1C778D72009DD596 /* LaunchScreen.storyboard */,
 				8C34D75D1C778D72009DD596 /* Info.plist */,
+				F19F76931C98DA63007D666B /* Students Results.swift */,
 			);
 			path = Phonus;
 			sourceTree = "<group>";
@@ -196,6 +205,7 @@
 				TargetAttributes = {
 					8C34D74B1C778D72009DD596 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 5KMQCX7WT8;
 					};
 					8C34D7611C778D73009DD596 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -259,8 +269,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F19F76941C98DA63007D666B /* Students Results.swift in Sources */,
 				8C34D7541C778D72009DD596 /* SecondViewController.swift in Sources */,
 				8C34D7501C778D72009DD596 /* AppDelegate.swift in Sources */,
+				F19F76961C98E111007D666B /* TestController.swift in Sources */,
+				F19F76921C98CE2E007D666B /* Results.swift in Sources */,
 				8C34D7521C778D72009DD596 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,10 +416,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Phonus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ricardoeuan.Phonus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -414,10 +430,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Phonus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ricardoeuan.Phonus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -488,6 +507,7 @@
 				8C34D7781C778D73009DD596 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C34D7791C778D73009DD596 /* Build configuration list for PBXNativeTarget "PhonusTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +516,7 @@
 				8C34D77B1C778D73009DD596 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C34D77C1C778D73009DD596 /* Build configuration list for PBXNativeTarget "PhonusUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +525,7 @@
 				8C34D77E1C778D73009DD596 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
