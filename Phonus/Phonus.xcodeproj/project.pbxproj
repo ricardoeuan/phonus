@@ -18,6 +18,14 @@
 		F19F76921C98CE2E007D666B /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F76911C98CE2E007D666B /* Results.swift */; };
 		F19F76941C98DA63007D666B /* Students Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F76931C98DA63007D666B /* Students Results.swift */; };
 		F19F76961C98E111007D666B /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F76951C98E111007D666B /* TestController.swift */; };
+		F1DA87CA1CAB238300EC28D1 /* PlayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F1DA87C91CAB238300EC28D1 /* PlayButton.png */; };
+		F1DA87CD1CAB259900EC28D1 /* Stereo.png in Resources */ = {isa = PBXBuildFile; fileRef = F1DA87CB1CAB259900EC28D1 /* Stereo.png */; };
+		F1DA87CE1CAB259900EC28D1 /* Penguin.png in Resources */ = {isa = PBXBuildFile; fileRef = F1DA87CC1CAB259900EC28D1 /* Penguin.png */; };
+		F1DA87D01CAB29E100EC28D1 /* HeadPhones.png in Resources */ = {isa = PBXBuildFile; fileRef = F1DA87CF1CAB29E100EC28D1 /* HeadPhones.png */; };
+		F1F70E891CAB020500EEE9F5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1F70E881CAB020500EEE9F5 /* Media.xcassets */; };
+		F1F70E9F1CAB033E00EEE9F5 /* Board.png in Resources */ = {isa = PBXBuildFile; fileRef = F1F70E9E1CAB033E00EEE9F5 /* Board.png */; };
+		F1F70EA21CAB037F00EEE9F5 /* Aux.png in Resources */ = {isa = PBXBuildFile; fileRef = F1F70EA01CAB037F00EEE9F5 /* Aux.png */; };
+		F1F70EA31CAB037F00EEE9F5 /* PhonusLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = F1F70EA11CAB037F00EEE9F5 /* PhonusLogo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +63,14 @@
 		F19F76911C98CE2E007D666B /* Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		F19F76931C98DA63007D666B /* Students Results.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Students Results.swift"; sourceTree = "<group>"; };
 		F19F76951C98E111007D666B /* TestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
+		F1DA87C91CAB238300EC28D1 /* PlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButton.png; sourceTree = "<group>"; };
+		F1DA87CB1CAB259900EC28D1 /* Stereo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stereo.png; sourceTree = "<group>"; };
+		F1DA87CC1CAB259900EC28D1 /* Penguin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Penguin.png; sourceTree = "<group>"; };
+		F1DA87CF1CAB29E100EC28D1 /* HeadPhones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeadPhones.png; sourceTree = "<group>"; };
+		F1F70E881CAB020500EEE9F5 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		F1F70E9E1CAB033E00EEE9F5 /* Board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Board.png; sourceTree = "<group>"; };
+		F1F70EA01CAB037F00EEE9F5 /* Aux.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aux.png; sourceTree = "<group>"; };
+		F1F70EA11CAB037F00EEE9F5 /* PhonusLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhonusLogo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +127,15 @@
 				8C34D7551C778D72009DD596 /* Main.storyboard */,
 				F19F76951C98E111007D666B /* TestController.swift */,
 				F19F76911C98CE2E007D666B /* Results.swift */,
+				F1F70E881CAB020500EEE9F5 /* Media.xcassets */,
 				8C34D7581C778D72009DD596 /* Assets.xcassets */,
+				F1F70E9E1CAB033E00EEE9F5 /* Board.png */,
+				F1F70EA01CAB037F00EEE9F5 /* Aux.png */,
+				F1F70EA11CAB037F00EEE9F5 /* PhonusLogo.png */,
+				F1DA87C91CAB238300EC28D1 /* PlayButton.png */,
+				F1DA87CB1CAB259900EC28D1 /* Stereo.png */,
+				F1DA87CC1CAB259900EC28D1 /* Penguin.png */,
+				F1DA87CF1CAB29E100EC28D1 /* HeadPhones.png */,
 				8C34D75A1C778D72009DD596 /* LaunchScreen.storyboard */,
 				8C34D75D1C778D72009DD596 /* Info.plist */,
 				F19F76931C98DA63007D666B /* Students Results.swift */,
@@ -242,8 +266,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1F70EA21CAB037F00EEE9F5 /* Aux.png in Resources */,
+				F1F70E9F1CAB033E00EEE9F5 /* Board.png in Resources */,
+				F1DA87CD1CAB259900EC28D1 /* Stereo.png in Resources */,
+				F1F70E891CAB020500EEE9F5 /* Media.xcassets in Resources */,
+				F1DA87CA1CAB238300EC28D1 /* PlayButton.png in Resources */,
+				F1F70EA31CAB037F00EEE9F5 /* PhonusLogo.png in Resources */,
 				8C34D75C1C778D72009DD596 /* LaunchScreen.storyboard in Resources */,
+				F1DA87D01CAB29E100EC28D1 /* HeadPhones.png in Resources */,
 				8C34D7591C778D72009DD596 /* Assets.xcassets in Resources */,
+				F1DA87CE1CAB259900EC28D1 /* Penguin.png in Resources */,
 				8C34D7571C778D72009DD596 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
