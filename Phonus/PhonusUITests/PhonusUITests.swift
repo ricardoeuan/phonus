@@ -2,8 +2,8 @@
 //  PhonusUITests.swift
 //  PhonusUITests
 //
-//  Created by Ricardo Euán on 2/19/16.
-//  Copyright © 2016 Ricardo Euán. All rights reserved.
+//  Created by Ricardo Euán Romo on 4/16/16.
+//  Copyright © 2016 Ricardo Euán Romo. All rights reserved.
 //
 
 import XCTest
