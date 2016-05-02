@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CircleMenu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Eureka.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Phonus.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,7 +32,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>21DC50E37E28216C4982AB0D278F7E75</key>
+		<key>27533A6098E2BDD80827924FA8F4E742</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>67214FA1735E06E7C9FC95CACC5F4F1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -32,7 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C993B889A594C42E4CA571DE543E3A85</key>
+		<key>7E82EF3158DC7672612EFE46DB8E4C8F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8106510108E2597640411EECBE39C7B7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F210CC41CCD92A0003CC2CE /* CircleMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F210CC31CCD92A0003CC2CE /* CircleMenu.framework */; };
+		7F210CC61CCDBB02003CC2CE /* ExamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F210CC51CCDBB02003CC2CE /* ExamDetailsViewController.swift */; };
+		7F210CCD1CCDCC19003CC2CE /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F210CCC1CCDCC19003CC2CE /* ExamViewController.swift */; };
 		7F435F2F1CCC6F00007F3655 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F435F2E1CCC6F00007F3655 /* Alamofire.framework */; };
 		7F435F311CCC71DF007F3655 /* ExamRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F435F301CCC71DF007F3655 /* ExamRouter.swift */; };
 		7F59674F1CC3281700F5D3EE /* PhonusAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F59674E1CC3281700F5D3EE /* PhonusAPIManager.swift */; };
 		7F5967531CC32EEF00F5D3EE /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5967521CC32EEF00F5D3EE /* SwiftyJSON.framework */; };
+		7F7FC7981CCFBB62005BBA5F /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F7FC7971CCFBB62005BBA5F /* Eureka.framework */; };
+		7F7FC79A1CCFD638005BBA5F /* CustomCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FC7991CCFD638005BBA5F /* CustomCells.swift */; };
+		7F7FC79C1CCFD7E0005BBA5F /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */; };
 		7F9EB5C11CC3256700DD8CC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EB5C01CC3256700DD8CC6 /* AppDelegate.swift */; };
 		7F9EB5C31CC3256700DD8CC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EB5C21CC3256700DD8CC6 /* ViewController.swift */; };
 		7F9EB5C61CC3256700DD8CC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9EB5C41CC3256700DD8CC6 /* Main.storyboard */; };
@@ -19,6 +25,10 @@
 		7F9EB5CE1CC3256700DD8CC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9EB5CC1CC3256700DD8CC6 /* LaunchScreen.storyboard */; };
 		7F9EB5D91CC3256800DD8CC6 /* PhonusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EB5D81CC3256800DD8CC6 /* PhonusTests.swift */; };
 		7F9EB5E41CC3256800DD8CC6 /* PhonusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EB5E31CC3256800DD8CC6 /* PhonusUITests.swift */; };
+		7FB2F5EE1CD5B4DA00B09585 /* AVTonePlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2F5ED1CD5B4DA00B09585 /* AVTonePlayerUnit.swift */; };
+		7FB87EC81CCEF51F000C2C58 /* AudioTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB87EC71CCEF51F000C2C58 /* AudioTestViewController.swift */; };
+		7FDFCBD61CCD16A700B5C297 /* ExamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDFCBD51CCD16A700B5C297 /* ExamDetails.swift */; };
+		7FE0CD1C1CD6D3A5001171BC /* JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE0CD1B1CD6D3A5001171BC /* JSONSerializable.swift */; };
 		A88DCFD2238A53F7468B4E82 /* Pods_Phonus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23B653DBCF6811834279368 /* Pods_Phonus.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,10 +51,16 @@
 
 /* Begin PBXFileReference section */
 		33D1394D4FA2140BE08BA8D3 /* Pods-Phonus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phonus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Phonus/Pods-Phonus.release.xcconfig"; sourceTree = "<group>"; };
+		7F210CC31CCD92A0003CC2CE /* CircleMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CircleMenu.framework; path = "../../../Library/Developer/Xcode/DerivedData/Phonus-fjfcbrkbomjagzduanqyapuwmzzo/Build/Products/Debug-iphonesimulator/CircleMenu.framework"; sourceTree = "<group>"; };
+		7F210CC51CCDBB02003CC2CE /* ExamDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamDetailsViewController.swift; sourceTree = "<group>"; };
+		7F210CCC1CCDCC19003CC2CE /* ExamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
 		7F435F2E1CCC6F00007F3655 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/Phonus-fjfcbrkbomjagzduanqyapuwmzzo/Build/Products/Debug-iphonesimulator/Alamofire.framework"; sourceTree = "<group>"; };
 		7F435F301CCC71DF007F3655 /* ExamRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamRouter.swift; sourceTree = "<group>"; };
 		7F59674E1CC3281700F5D3EE /* PhonusAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonusAPIManager.swift; sourceTree = "<group>"; };
 		7F5967521CC32EEF00F5D3EE /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../Library/Developer/Xcode/DerivedData/Phonus-fjfcbrkbomjagzduanqyapuwmzzo/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		7F7FC7971CCFBB62005BBA5F /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
+		7F7FC7991CCFD638005BBA5F /* CustomCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCells.swift; path = ../Stores/CustomCells.swift; sourceTree = "<group>"; };
+		7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
 		7F9EB5BD1CC3256700DD8CC6 /* Phonus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phonus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9EB5C01CC3256700DD8CC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F9EB5C21CC3256700DD8CC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +75,11 @@
 		7F9EB5DF1CC3256800DD8CC6 /* PhonusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhonusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9EB5E31CC3256800DD8CC6 /* PhonusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonusUITests.swift; sourceTree = "<group>"; };
 		7F9EB5E51CC3256800DD8CC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FB2F5DF1CD5479900B09585 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7FB2F5ED1CD5B4DA00B09585 /* AVTonePlayerUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVTonePlayerUnit.swift; sourceTree = "<group>"; };
+		7FB87EC71CCEF51F000C2C58 /* AudioTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioTestViewController.swift; sourceTree = "<group>"; };
+		7FDFCBD51CCD16A700B5C297 /* ExamDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamDetails.swift; sourceTree = "<group>"; };
+		7FE0CD1B1CD6D3A5001171BC /* JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializable.swift; sourceTree = "<group>"; };
 		D22623D58F084BD818B7756B /* Pods-Phonus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phonus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Phonus/Pods-Phonus.debug.xcconfig"; sourceTree = "<group>"; };
 		D23B653DBCF6811834279368 /* Pods_Phonus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phonus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -68,6 +89,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F7FC7981CCFBB62005BBA5F /* Eureka.framework in Frameworks */,
+				7F210CC41CCD92A0003CC2CE /* CircleMenu.framework in Frameworks */,
 				7F435F2F1CCC6F00007F3655 /* Alamofire.framework in Frameworks */,
 				7F5967531CC32EEF00F5D3EE /* SwiftyJSON.framework in Frameworks */,
 				A88DCFD2238A53F7468B4E82 /* Pods_Phonus.framework in Frameworks */,
@@ -91,6 +114,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F210CC71CCDBC64003CC2CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7FDFCBD51CCD16A700B5C297 /* ExamDetails.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7F210CC81CCDBC6A003CC2CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7F210CC91CCDBC73003CC2CE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F9EB5C21CC3256700DD8CC6 /* ViewController.swift */,
+				7F210CC51CCDBB02003CC2CE /* ExamDetailsViewController.swift */,
+				7F210CCC1CCDCC19003CC2CE /* ExamViewController.swift */,
+				7FB87EC71CCEF51F000C2C58 /* AudioTestViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7F210CCA1CCDBC7E003CC2CE /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		7F210CCB1CCDBC83003CC2CE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7FF40E6F1CD6FEE400D4184E /* ui */,
+				7FF40E6E1CD6FED800D4184E /* audio */,
+				7FF40E6D1CD6FEBB00D4184E /* api */,
+				7FF40E6C1CD6FEB300D4184E /* json */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		7F9EB5B41CC3256700DD8CC6 = {
 			isa = PBXGroup;
 			children = (
@@ -116,15 +183,17 @@
 		7F9EB5BF1CC3256700DD8CC6 /* Phonus */ = {
 			isa = PBXGroup;
 			children = (
+				7F210CCB1CCDBC83003CC2CE /* Helpers */,
+				7F210CCA1CCDBC7E003CC2CE /* Stores */,
+				7F210CC91CCDBC73003CC2CE /* Controllers */,
+				7F210CC81CCDBC6A003CC2CE /* Views */,
+				7F210CC71CCDBC64003CC2CE /* Models */,
 				7F9EB5C01CC3256700DD8CC6 /* AppDelegate.swift */,
-				7F9EB5C21CC3256700DD8CC6 /* ViewController.swift */,
 				7F9EB5C41CC3256700DD8CC6 /* Main.storyboard */,
 				7F9EB5CA1CC3256700DD8CC6 /* Assets.xcassets */,
 				7F9EB5CC1CC3256700DD8CC6 /* LaunchScreen.storyboard */,
 				7F9EB5CF1CC3256700DD8CC6 /* Info.plist */,
 				7F9EB5C71CC3256700DD8CC6 /* Phonus.xcdatamodeld */,
-				7F59674E1CC3281700F5D3EE /* PhonusAPIManager.swift */,
-				7F435F301CCC71DF007F3655 /* ExamRouter.swift */,
 			);
 			path = Phonus;
 			sourceTree = "<group>";
@@ -147,9 +216,46 @@
 			path = PhonusUITests;
 			sourceTree = "<group>";
 		};
+		7FF40E6C1CD6FEB300D4184E /* json */ = {
+			isa = PBXGroup;
+			children = (
+				7FE0CD1B1CD6D3A5001171BC /* JSONSerializable.swift */,
+			);
+			name = json;
+			sourceTree = "<group>";
+		};
+		7FF40E6D1CD6FEBB00D4184E /* api */ = {
+			isa = PBXGroup;
+			children = (
+				7F435F301CCC71DF007F3655 /* ExamRouter.swift */,
+				7F59674E1CC3281700F5D3EE /* PhonusAPIManager.swift */,
+			);
+			name = api;
+			sourceTree = "<group>";
+		};
+		7FF40E6E1CD6FED800D4184E /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				7FB2F5ED1CD5B4DA00B09585 /* AVTonePlayerUnit.swift */,
+			);
+			name = audio;
+			sourceTree = "<group>";
+		};
+		7FF40E6F1CD6FEE400D4184E /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */,
+				7F7FC7991CCFD638005BBA5F /* CustomCells.swift */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
 		A415A55AD202D517000F077F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FB2F5DF1CD5479900B09585 /* AudioToolbox.framework */,
+				7F7FC7971CCFBB62005BBA5F /* Eureka.framework */,
+				7F210CC31CCD92A0003CC2CE /* CircleMenu.framework */,
 				7F435F2E1CCC6F00007F3655 /* Alamofire.framework */,
 				7F5967521CC32EEF00F5D3EE /* SwiftyJSON.framework */,
 				D23B653DBCF6811834279368 /* Pods_Phonus.framework */,
@@ -351,10 +457,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FDFCBD61CCD16A700B5C297 /* ExamDetails.swift in Sources */,
+				7FB87EC81CCEF51F000C2C58 /* AudioTestViewController.swift in Sources */,
+				7FE0CD1C1CD6D3A5001171BC /* JSONSerializable.swift in Sources */,
+				7F7FC79A1CCFD638005BBA5F /* CustomCells.swift in Sources */,
+				7FB2F5EE1CD5B4DA00B09585 /* AVTonePlayerUnit.swift in Sources */,
 				7F9EB5C31CC3256700DD8CC6 /* ViewController.swift in Sources */,
 				7F9EB5C91CC3256700DD8CC6 /* Phonus.xcdatamodeld in Sources */,
+				7F210CC61CCDBB02003CC2CE /* ExamDetailsViewController.swift in Sources */,
 				7F59674F1CC3281700F5D3EE /* PhonusAPIManager.swift in Sources */,
+				7F210CCD1CCDCC19003CC2CE /* ExamViewController.swift in Sources */,
 				7F9EB5C11CC3256700DD8CC6 /* AppDelegate.swift in Sources */,
+				7F7FC79C1CCFD7E0005BBA5F /* FloatLabelTextField.swift in Sources */,
 				7F435F311CCC71DF007F3655 /* ExamRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,10 +614,17 @@
 			baseConfigurationReference = D22623D58F084BD818B7756B /* Pods-Phonus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Phonus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.itesm.Phonus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -512,7 +633,13 @@
 			baseConfigurationReference = 33D1394D4FA2140BE08BA8D3 /* Pods-Phonus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Phonus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.itesm.Phonus;
 				PRODUCT_NAME = "$(TARGET_NAME)";

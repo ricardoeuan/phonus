@@ -3,5 +3,7 @@ use_frameworks!
 
 target 'Phonus' do
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+  pod 'CircleMenu', '~> 1.0.0'
   pod 'Alamofire', '~> 3.3'
+  pod 'Eureka', '~> 1.5'
 end

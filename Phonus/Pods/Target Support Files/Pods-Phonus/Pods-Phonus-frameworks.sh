@@ -85,9 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Phonus/Alamofire.framework"
+  install_framework "Pods-Phonus/CircleMenu.framework"
+  install_framework "Pods-Phonus/Eureka.framework"
   install_framework "Pods-Phonus/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Phonus/Alamofire.framework"
+  install_framework "Pods-Phonus/CircleMenu.framework"
+  install_framework "Pods-Phonus/Eureka.framework"
   install_framework "Pods-Phonus/SwiftyJSON.framework"
 fi

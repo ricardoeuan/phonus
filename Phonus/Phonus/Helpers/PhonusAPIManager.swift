@@ -16,13 +16,12 @@ class PhonusAPIManager: NSObject {
     // Single instance for API calls
     static let sharedInstance = PhonusAPIManager()
     
-    // Function for debug purposes only
-    func printExamResults() -> Void {
-        Alamofire.request(ExamRouter.GetExamById(21))
-            .responseString { response in
-                if let receivedString = response.result.value {
-                    print(receivedString)
-                }
+    // Get ExamDetails by ID and serialize JSON resposne into ExamDetails Object
+    func getExamDetails(examId: Int, completionHandler: (Result<ExamDetails, NSError>) -> Void) {
+        Alamofire.request(ExamRouter.GetExamById(examId))
+        .responseObject { (response: Response<ExamDetails, NSError>) in
+            completionHandler(response.result)
         }
     }
 }
+
