@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hny-jm-vDY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hny-jm-vDY">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Phonus Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Phonus" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VNA-fd-KY3"/>
+                    <navigationItem key="navigationItem" title="Phonus Home" id="VNA-fd-KY3">
+                        <barButtonItem key="rightBarButtonItem" title="Toggle" id="Khx-3b-Ili">
+                            <connections>
+                                <action selector="toggleSideMenu:" destination="BYZ-38-t0r" id="WdV-Kh-NNR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="H6v-pu-NXJ" kind="show" identifier="Results" id="LfR-ga-fBL"/>
                         <segue destination="A6G-gu-fKr" kind="show" identifier="Exam" id="brO-3y-9vF"/>
@@ -77,7 +84,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ik5-zM-tBo">
                                 <rect key="frame" x="260" y="91" width="84" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -103,17 +110,54 @@
                     <view key="view" contentMode="scaleToFill" id="9Qi-E7-eAd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Huf-TA-TCI">
+                                <rect key="frame" x="159" y="184" width="282" height="231"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="282" id="0c1-wN-8V9"/>
+                                    <constraint firstAttribute="height" constant="231" id="cHn-gf-JhL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BkD-6h-gF1">
+                                <rect key="frame" x="20" y="72" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCB-Gr-oHY">
+                                <rect key="frame" x="276" y="550" width="48" height="30"/>
+                                <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="search:" destination="H6v-pu-NXJ" eventType="touchUpInside" id="67y-59-ch5"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BkD-6h-gF1" firstAttribute="leading" secondItem="9Qi-E7-eAd" secondAttribute="leadingMargin" id="16Q-sc-LnC"/>
+                            <constraint firstItem="Huf-TA-TCI" firstAttribute="centerX" secondItem="dCB-Gr-oHY" secondAttribute="centerX" id="D0V-A2-cRx"/>
+                            <constraint firstItem="Huf-TA-TCI" firstAttribute="centerY" secondItem="9Qi-E7-eAd" secondAttribute="centerY" id="OWG-Fb-cgQ"/>
+                            <constraint firstItem="BkD-6h-gF1" firstAttribute="centerX" secondItem="Huf-TA-TCI" secondAttribute="centerX" id="Or3-Z7-8TF"/>
+                            <constraint firstItem="BkD-6h-gF1" firstAttribute="top" secondItem="z0U-uU-vWu" secondAttribute="bottom" constant="8" symbolic="YES" id="Ufv-dZ-R0E"/>
+                            <constraint firstAttribute="bottom" secondItem="dCB-Gr-oHY" secondAttribute="bottom" constant="20" symbolic="YES" id="YkV-Bh-F6V"/>
+                            <constraint firstItem="Huf-TA-TCI" firstAttribute="centerX" secondItem="9Qi-E7-eAd" secondAttribute="centerX" id="Yqv-py-cOK"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="Huf-TA-TCI" id="jc3-NG-ZjM"/>
+                        <outlet property="examIdTextField" destination="BkD-6h-gF1" id="u0B-nM-eWK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uc4-1V-FRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1923" y="864"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Navigation Controller-->
         <scene sceneID="gzD-CZ-hBj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hny-jm-vDY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hny-jm-vDY" customClass="MainNavigationController" customModule="Phonus" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xe2-zZ-n1A">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

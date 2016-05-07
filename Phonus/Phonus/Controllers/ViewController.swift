@@ -21,7 +21,7 @@ extension UIColor {
     }
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ENSideMenuDelegate {
     
     let systemSoundID: SystemSoundID = 1259;
     
@@ -47,7 +47,64 @@ class ViewController: UIViewController {
                 button.delegate = self
                 button.layer.cornerRadius = button.frame.size.width / 2.0
                 view.addSubview(button)
-
+        
+        let circleButton = UIButton(type: .Custom)
+        circleButton.frame = CGRectMake(75, 800, 100, 100)
+        circleButton.layer.cornerRadius = circleButton.frame.size.width / 2.0
+        circleButton.setTitle("12", forState: UIControlState.Normal)
+        circleButton.setBackgroundImage(UIImage(named:"total-btn.png"), forState: .Normal)
+        circleButton.addTarget(self, action: #selector(thumbsUpButtonPressed), forControlEvents: .TouchUpInside)
+        view.addSubview(circleButton)
+        
+        let label = UILabel(frame: CGRectMake(75, 870, 100, 100))
+        label.textAlignment = NSTextAlignment.Center
+        label.text = "Total"
+        self.view.addSubview(label)
+        
+        let sentButton = UIButton(type: .Custom)
+        sentButton.frame = CGRectMake(250, 800, 100, 100)
+        sentButton.layer.cornerRadius = sentButton.frame.size.width / 2.0
+        sentButton.setTitle("7", forState: UIControlState.Normal)
+        sentButton.setBackgroundImage(UIImage(named:"passed-btn.png"), forState: .Normal)
+        sentButton.addTarget(self, action: #selector(thumbsUpButtonPressed), forControlEvents: .TouchUpInside)
+        view.addSubview(sentButton)
+        
+        let sentLabel = UILabel(frame: CGRectMake(250, 870, 100, 100))
+        sentLabel.textAlignment = NSTextAlignment.Center
+        sentLabel.text = "Passed"
+        self.view.addSubview(sentLabel)
+        
+        let pendingButton = UIButton(type: .Custom)
+        pendingButton.frame = CGRectMake(425, 800, 100, 100)
+        pendingButton.layer.cornerRadius = pendingButton.frame.size.width / 2.0
+        pendingButton.setTitle("4", forState: UIControlState.Normal)
+        pendingButton.setBackgroundImage(UIImage(named:"failed-btn.png"), forState: .Normal)
+        pendingButton.addTarget(self, action: #selector(thumbsUpButtonPressed), forControlEvents: .TouchUpInside)
+        view.addSubview(pendingButton)
+        
+        let pendingLabel = UILabel(frame: CGRectMake(425, 870, 100, 100))
+        pendingLabel.textAlignment = NSTextAlignment.Center
+        pendingLabel.text = "Failed"
+        self.view.addSubview(pendingLabel)
+        
+        let unsentButton = UIButton(type: .Custom)
+        unsentButton.frame = CGRectMake(600, 800, 100, 100)
+        unsentButton.layer.cornerRadius = unsentButton.frame.size.width / 2.0
+        unsentButton.setTitle("2", forState: UIControlState.Normal)
+        unsentButton.setBackgroundImage(UIImage(named:"unsent-btn.png"), forState: .Normal)
+        unsentButton.addTarget(self, action: #selector(thumbsUpButtonPressed), forControlEvents: .TouchUpInside)
+        view.addSubview(unsentButton)
+        
+        let unsentLabel = UILabel(frame: CGRectMake(600, 870, 100, 100))
+        unsentLabel.textAlignment = NSTextAlignment.Center
+        unsentLabel.text = "Unsent"
+        self.view.addSubview(unsentLabel)
+        
+        self.sideMenuController()?.sideMenu?.delegate = self
+    }
+    
+    func thumbsUpButtonPressed() {
+        print("thumbs up button pressed")
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,6 +141,32 @@ class ViewController: UIViewController {
             print("nothing selected")
         }
     }
-
+    
+    
+    @IBAction func toggleSideMenu(sender: AnyObject) {
+        toggleSideMenuView()
+    }
+    
+    // MARK: - ENSideMenu Delegate
+    func sideMenuWillOpen() {
+        print("sideMenuWillOpen")
+    }
+    
+    func sideMenuWillClose() {
+        print("sideMenuWillClose")
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        print("sideMenuShouldOpenSideMenu")
+        return true
+    }
+    
+    func sideMenuDidClose() {
+        print("sideMenuDidClose")
+    }
+    
+    func sideMenuDidOpen() {
+        print("sideMenuDidOpen")
+    }
 }
 

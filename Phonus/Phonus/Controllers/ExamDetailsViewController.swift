@@ -9,17 +9,19 @@
 import UIKit
 import Eureka
 
-class ExamDetailsViewController: FormViewController {
+class ExamDetailsViewController: UIViewController {
+        
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var examIdTextField: UITextField!
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        loadExamDetails()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -27,8 +29,12 @@ class ExamDetailsViewController: FormViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func loadExamDetails() {
-        PhonusAPIManager.sharedInstance.getExamDetails(21) { result in
+    
+    @IBAction func search(sender: AnyObject) {        loadExamDetails(Int(examIdTextField.text!)!)
+    }
+    
+    func loadExamDetails(examId: Int) {
+        PhonusAPIManager.sharedInstance.getExamDetails(examId) { result in
             // Validate response error
             if let error = result.error {
                 print("Error calling /examen/DetallesExamen")
@@ -41,6 +47,7 @@ class ExamDetailsViewController: FormViewController {
                 print("Error calling /examen/DetallesExamen : result is nil")
                 return
             }
+            self.descriptionLabel.text = examDetails.description()
             print(examDetails.description())
         }
     }
