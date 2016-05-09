@@ -10,22 +10,36 @@ import UIKit
 import Eureka
 import CoreLocation
 
-class ExamViewController: FormViewController {
+class ExamViewController: FormViewController, CLLocationManagerDelegate {
+    
+    var locationManager: CLLocationManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically from a nib. 
+        
+        locationManager = CLLocationManager()
+        
+        // Request authorization from user
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+        
         TextRow.defaultCellUpdate = { cell, row in
             cell.textLabel?.font = UIFont.italicSystemFontOfSize(12)
         }
         
         form = Section("Nuevo Examen de Phonus:")
-            <<< SegmentedRow<String>("segments"){
-                $0.options = ["Anonimo", "Registrado"]
-                $0.value = "Registrado"
-            }
+            
             +++ Section(){
                 $0.tag = "unknown_s"
-                $0.hidden = "$segments != 'Anonimo'" // .Predicate(NSPredicate(format: "$segments != 'Sport'"))
             }
             <<< NameRow(){
                 $0.title = "Nombre:"
@@ -39,14 +53,6 @@ class ExamViewController: FormViewController {
                 $0.title = "Apellido Materno:"
             }
             
-            +++ Section(){
-                $0.tag = "registered_s"
-                $0.hidden = "$segments != 'Registrado'"
-            }
-            <<< IntRow(){
-                $0.title = "ID de Examen:"
-            }
-            
             +++ Section()
             
             <<< SwitchRow("Modificar Ubicación"){
@@ -54,14 +60,14 @@ class ExamViewController: FormViewController {
             }
             
             +++ Section(footer: "Esta es tu ubicación actual y puede ser modificada manualmente"){
-                $0.hidden = .Function(["Modificar Ubicación"], { form -> Bool in
+                $0.hidden = .Function(["Verificar Ubicación"], { form -> Bool in
                     let row: RowOf<Bool>! = form.rowByTag("Modificar Ubicación")
                     return row.value ?? false == false
                 })
             }
-            <<< LocationRow(){
+            <<< LocationRow("location"){
                 $0.title = "Tu ubicación actual"
-                $0.value = CLLocation(latitude: 21.9329867, longitude: -102.3394496)
+                $0.value = locationManager.location
         }
         
             +++ Section()
@@ -77,5 +83,13 @@ class ExamViewController: FormViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: CLLocationManagerDelegate
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        self.form.setValues(["location" : CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)])
+        self.tableView?.reloadData()
     }
 }

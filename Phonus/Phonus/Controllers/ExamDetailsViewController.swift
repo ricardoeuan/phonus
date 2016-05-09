@@ -9,11 +9,7 @@
 import UIKit
 import Eureka
 
-class ExamDetailsViewController: UIViewController {
-        
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var examIdTextField: UITextField!
-    
+class ExamDetailsViewController: FormViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -21,16 +17,45 @@ class ExamDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        TextRow.defaultCellUpdate = { cell, row in
+            cell.textLabel?.font = UIFont.italicSystemFontOfSize(12)
+        }
+        
+        form = Section("Búsqueda:")
+            <<< IntRow("examenId"){
+                $0.title = "ID de Examen:"
+            }
+            
+            +++ Section("Results")
+            <<< TextRow("Date") {
+                $0.title = "Fecha"
+                $0.disabled = true
+            }
+            <<< NameRow("Name") {
+                $0.title = "Nombre"
+                $0.disabled = true
+            }
+            <<< IntRow("MinFreq") {
+                $0.title = "Minimum Frequency"
+                $0.disabled = true
+            }
+            <<< IntRow("MaxFreq") {
+                $0.title = "Maximum Frequency"
+                $0.disabled = true
+            }
+            
+            +++ Section()
+            <<< ButtonRow() {
+                $0.title = "Buscar"
+                $0.onCellSelection { cell, row in
+                    self.loadExamDetails(self.form.values()["examenId"] as! Int)
+                }
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    
-    @IBAction func search(sender: AnyObject) {        loadExamDetails(Int(examIdTextField.text!)!)
     }
     
     func loadExamDetails(examId: Int) {
@@ -47,7 +72,8 @@ class ExamDetailsViewController: UIViewController {
                 print("Error calling /examen/DetallesExamen : result is nil")
                 return
             }
-            self.descriptionLabel.text = examDetails.description()
+            self.form.setValues(["Date": examDetails.date, "Name": examDetails.name, "MinFreq": examDetails.minFrequency, "MaxFreq": examDetails.maxFrequency])
+            self.tableView?.reloadData()
             print(examDetails.description())
         }
     }

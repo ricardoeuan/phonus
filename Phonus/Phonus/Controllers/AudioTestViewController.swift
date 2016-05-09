@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Foundation
 
 class AudioTestViewController: UIViewController {
     
@@ -15,19 +16,23 @@ class AudioTestViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     var engine: AVAudioEngine!
     var tone: AVTonePlayerUnit!
+    var asyncSliderUpdater: NSTimer!
     let minSliderVal:Float = -5.0       //  250 hz
     let maxSliderVal:Float = 1.321925   //  20000 hz
+    
+    var progress: KDCircularProgress!
     
     override func viewDidAppear(animated: Bool) {
         //TEST POST operation
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.color(0, green: 51, blue: 102, alpha: 1)
+        
         tone = AVTonePlayerUnit()
-        label.text = String(format: "%.1f", tone.frequency)
+        label.text = String(format: "%.1f", tone.frequency) + " Hz"
         slider.minimumValue = minSliderVal
         slider.maximumValue = maxSliderVal
         slider.value = 0.0
@@ -44,6 +49,9 @@ class AudioTestViewController: UIViewController {
         } catch let error as NSError {
             print(error)
         }
+        
+        initCircularProgress()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,23 +59,47 @@ class AudioTestViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func sliderChanged(sender: UISlider) {
-        let freq = 8000.0 * pow(2.0, Double(slider.value))
-        tone.frequency = freq
-        label.text = String(format: "%.1f", freq)
+    // MARK: KDCircularProgress
+    
+    func initCircularProgress() {
+        progress = KDCircularProgress(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        progress.startAngle = -90
+        progress.angle = Double((slider.value * 55.5555556) + 285)
+        progress.progressThickness = 0.6
+        progress.trackThickness = 0.8
+        progress.clockwise = true
+        progress.gradientRotateSpeed = 2
+        progress.roundedCorners = true
+        progress.glowMode = .Forward
+        //progress.setColors(UIColor.color(0, green: 245, blue: 255, alpha: 1))
+        progress.setColors(UIColor.greenColor())
+        progress.trackColor = UIColor.darkGrayColor()
+        progress.center = CGPoint(x: view.center.x, y: view.center.y)
+        view.addSubview(progress)
     }
     
+    // MARK: Slider Control
     
-    @IBAction func togglePlay(sender: UIButton) {
-        if tone.playing {
-            engine.mainMixerNode.volume = 0.0
-            tone.stop()
-            sender.setTitle("Start", forState: .Normal)
-        } else {
-            tone.preparePlaying()
-            tone.play()
-            engine.mainMixerNode.volume = 1.0
-            sender.setTitle("Stop", forState: .Normal)
-        }
+    func asyncSliderUpate() {
+        slider.value += 0.1690715383
+        let freq = 8000.0 * pow(2.0, Double(slider.value))
+        tone.frequency = freq
+        progress.angle = Double((slider.value * 55.5555556) + 285)
+        label.text = String(format: "%.1f", freq) + " Hz"
+    }
+    
+    // MARK: UI Actions
+    
+    @IBAction func startTest(sender: AnyObject) {
+        tone.preparePlaying()
+        tone.play()
+        engine.mainMixerNode.volume = 1.0
+        asyncSliderUpdater = NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: #selector(AudioTestViewController.asyncSliderUpate), userInfo: nil, repeats: true)
+    }
+    
+    @IBAction func endTest(sender: AnyObject) {
+        asyncSliderUpdater.invalidate()
+        engine.mainMixerNode.volume = 0.0
+        tone.stop()
     }
 }
