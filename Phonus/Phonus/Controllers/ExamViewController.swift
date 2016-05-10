@@ -12,7 +12,7 @@ import CoreLocation
 
 class ExamViewController: FormViewController, CLLocationManagerDelegate {
     
-    var locationManager: CLLocationManager!
+    var locationManager: CLLocationManager!    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,34 +41,34 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
             +++ Section(){
                 $0.tag = "unknown_s"
             }
-            <<< NameRow(){
+            <<< NameRow("name"){
                 $0.title = "Nombre:"
             }
             
-            <<< NameRow(){
+            <<< NameRow("secondName"){
                 $0.title = "Apellido Paterno:"
             }
             
-            <<< NameRow(){
+            <<< NameRow("thirdName"){
                 $0.title = "Apellido Materno:"
             }
             
             +++ Section()
             
-            <<< SwitchRow("Modificar Ubicación"){
+            <<< SwitchRow("Verificar Ubicación"){
                 $0.title = $0.tag
             }
             
             +++ Section(footer: "Esta es tu ubicación actual y puede ser modificada manualmente"){
                 $0.hidden = .Function(["Verificar Ubicación"], { form -> Bool in
-                    let row: RowOf<Bool>! = form.rowByTag("Modificar Ubicación")
+                    let row: RowOf<Bool>! = form.rowByTag("Verificar Ubicación")
                     return row.value ?? false == false
                 })
             }
             <<< LocationRow("location"){
                 $0.title = "Tu ubicación actual"
                 $0.value = locationManager.location
-        }
+            }
         
             +++ Section()
             <<< ButtonRow() {
@@ -91,5 +91,15 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         self.form.setValues(["location" : CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)])
         self.tableView?.reloadData()
+    }
+    
+    // MARK: Share form data to AudioTestViewController
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "AudioTest") {
+            let svc = segue.destinationViewController as! AudioTestViewController;
+            svc.name = self.form.values()["name"] as! String
+            svc.location = self.form.values()["location"] as! CLLocation
+        }
     }
 }

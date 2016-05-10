@@ -38,15 +38,16 @@ class ViewController: UIViewController, ENSideMenuDelegate {
         self.view.backgroundColor = UIColor.color(0, green: 51, blue: 102, alpha: 1)
 
                 let button = CircleMenu(
-                    frame: CGRect(x: 335, y: 400, width: 100, height: 100),
+                    frame: CGRect(x: 0, y: 0, width: 100, height: 100),
                     normalIcon:"icon_menu",
                     selectedIcon:"icon_close",
                     buttonsCount: 5,
                     duration: 0.3,
                     distance: 180)
+                button.center = CGPoint(x: view.center.x, y: view.center.y - 50)
                 button.backgroundColor = UIColor.lightGrayColor()
-                button.delegate = self
                 button.layer.cornerRadius = button.frame.size.width / 2.0
+                button.delegate = self
                 view.addSubview(button)
         
         addTrackingMenuButton(75, title: "12", imageName: "total-btn.png", labelText: "Total")

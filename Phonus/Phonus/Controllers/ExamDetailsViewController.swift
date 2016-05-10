@@ -25,7 +25,6 @@ class ExamDetailsViewController: FormViewController {
             <<< IntRow("examenId"){
                 $0.title = "ID de Examen:"
             }
-            
             +++ Section("Results")
             <<< TextRow("Date") {
                 $0.title = "Fecha"

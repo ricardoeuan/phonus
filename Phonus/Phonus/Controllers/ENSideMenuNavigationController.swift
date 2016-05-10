@@ -50,8 +50,6 @@ public class ENSideMenuNavigationController: UINavigationController, ENSideMenuP
             contentViewController.navigationItem.hidesBackButton = true
             self.setViewControllers([contentViewController], animated: true)
             break
-        }
-        
+        }        
     }
-    
 }

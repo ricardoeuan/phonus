@@ -9,11 +9,13 @@
 import UIKit
 import AVFoundation
 import Foundation
+import CoreLocation
 
 class AudioTestViewController: UIViewController {
     
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var label: UILabel!
+    
     var engine: AVAudioEngine!
     var tone: AVTonePlayerUnit!
     var asyncSliderUpdater: NSTimer!
@@ -21,6 +23,13 @@ class AudioTestViewController: UIViewController {
     let maxSliderVal:Float = 1.321925   //  20000 hz
     
     var progress: KDCircularProgress!
+    
+    // MARK: Shared variables from ExaViewController
+    
+    var name: String!
+    var location: CLLocation!
+    
+    var examParams:[String: AnyObject]!
     
     override func viewDidAppear(animated: Bool) {
         //TEST POST operation
@@ -88,6 +97,44 @@ class AudioTestViewController: UIViewController {
         label.text = String(format: "%.1f", freq) + " Hz"
     }
     
+    // MARK: Send Results Confirmation
+    
+    func displayConfirmationAlert() {
+        let refreshAlert = UIAlertController(title: "Confirmation", message: "Your results will be sent : " + "\(tone.frequency) Hz", preferredStyle: UIAlertControllerStyle.Alert)
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+        
+        self.examParams = [ "NombreAplicante" : "\(self.name)",
+            "FrecuenciaMaxima" : 250,
+            "FrecuenciaMinima" : self.tone.frequency,
+            "DireccionIp" : "192.168.1.254",
+            "Latitud" : self.location.coordinate.latitude,
+            "Longitud" : self.location.coordinate.longitude]
+            
+            print(self.examParams)
+            
+        PhonusAPIManager.sharedInstance.postExam(self.examParams, completionHandler: { result in
+            guard result.error == nil, let successValue = result.value
+                where successValue as! NSObject == true else {
+                if let error = result.error {
+                    print(error)
+                }
+                    let alertController = UIAlertController(title: "Could not send results",
+                        message: "Sorry, your results couldn't be sent. " +
+                        "Maybe Phonus service is down or you don't have an internet connection.",
+                        preferredStyle: .Alert)
+                        
+                    let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alertController.addAction(okAction)
+                    self.presentViewController(alertController, animated:true, completion: nil)
+                    return
+            }
+            self.navigationController?.popViewControllerAnimated(true)
+        })
+    }))
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+        presentViewController(refreshAlert, animated: true, completion: nil)
+    }
+    
     // MARK: UI Actions
     
     @IBAction func startTest(sender: AnyObject) {
@@ -101,5 +148,6 @@ class AudioTestViewController: UIViewController {
         asyncSliderUpdater.invalidate()
         engine.mainMixerNode.volume = 0.0
         tone.stop()
+        displayConfirmationAlert()
     }
 }

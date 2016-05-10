@@ -23,5 +23,24 @@ class PhonusAPIManager: NSObject {
             completionHandler(response.result)
         }
     }
+    
+    // Post Exam
+    func postExam(exam: [String: AnyObject], completionHandler: (Result<AnyObject, NSError>) -> Void) {
+        Alamofire.request(ExamRouter.RegisterExam(exam))
+        .response { (request, response, data, error) in
+            if let error = error {
+                print(error)
+                completionHandler(.Failure(error))
+                return
+            }
+            self.clearCache()
+            completionHandler(.Success(true))
+        }
+    }
+    
+    func clearCache() {
+        let cache = NSURLCache.sharedURLCache()
+        cache.removeAllCachedResponses()
+    }
 }
 
