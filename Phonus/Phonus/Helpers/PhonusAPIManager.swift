@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
 
 class PhonusAPIManager: NSObject {
@@ -25,16 +26,28 @@ class PhonusAPIManager: NSObject {
     }
     
     // Post Exam
-    func postExam(exam: [String: AnyObject], completionHandler: (Result<AnyObject, NSError>) -> Void) {
-        Alamofire.request(ExamRouter.RegisterExam(exam))
+    func postExam(name: String, maxFrequency: Double, minFrequency: Double, ipAddress: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, completionHandler: (Result<AnyObject, NSError>) -> Void) {
+        
+        let parameters: [String: AnyObject] = [
+            "NombreAplicante" : "\(name)",
+            "FrecuenciaMaxima" : maxFrequency,
+            "FrecuenciaMinima" : minFrequency,
+            "DireccionIp" : "\(ipAddress)",
+            "Latitud" : latitude,
+            "Longitud" : longitude
+        ]
+        
+        print(parameters)
+        
+        Alamofire.request(ExamRouter.RegisterExam(parameters))
         .response { (request, response, data, error) in
-            if let error = error {
+            guard error == nil else {
                 print(error)
-                completionHandler(.Failure(error))
+                completionHandler(.Failure(error!))
                 return
             }
             self.clearCache()
-            completionHandler(.Success(true))
+            completionHandler(.Success(true))            
         }
     }
     

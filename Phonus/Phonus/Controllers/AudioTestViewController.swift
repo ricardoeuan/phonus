@@ -101,18 +101,9 @@ class AudioTestViewController: UIViewController {
     
     func displayConfirmationAlert() {
         let refreshAlert = UIAlertController(title: "Confirmation", message: "Your results will be sent : " + "\(tone.frequency) Hz", preferredStyle: UIAlertControllerStyle.Alert)
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-        
-        self.examParams = [ "NombreAplicante" : "\(self.name)",
-            "FrecuenciaMaxima" : 250,
-            "FrecuenciaMinima" : self.tone.frequency,
-            "DireccionIp" : "192.168.1.254",
-            "Latitud" : self.location.coordinate.latitude,
-            "Longitud" : self.location.coordinate.longitude]
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in                
             
-            print(self.examParams)
-            
-        PhonusAPIManager.sharedInstance.postExam(self.examParams, completionHandler: { result in
+            PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: 250, minFrequency: self.tone.frequency, ipAddress: "192.168.1.254", latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
             guard result.error == nil, let successValue = result.value
                 where successValue as! NSObject == true else {
                 if let error = result.error {
@@ -127,12 +118,22 @@ class AudioTestViewController: UIViewController {
                     alertController.addAction(okAction)
                     self.presentViewController(alertController, animated:true, completion: nil)
                     return
-            }
+            }                
             self.navigationController?.popViewControllerAnimated(true)
         })
     }))
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
         presentViewController(refreshAlert, animated: true, completion: nil)
+    }
+    
+    func getJSONFromDictionary(params: NSDictionary) -> NSData {
+        let jsonParams: NSData!
+        do {
+            jsonParams = try NSJSONSerialization.dataWithJSONObject(params, options: [])
+        } catch {
+            jsonParams = nil
+        }
+        return jsonParams
     }
     
     // MARK: UI Actions
