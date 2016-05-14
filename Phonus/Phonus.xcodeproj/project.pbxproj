@@ -22,6 +22,7 @@
 		7F7FC79A1CCFD638005BBA5F /* CustomCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FC7991CCFD638005BBA5F /* CustomCells.swift */; };
 		7F7FC79C1CCFD7E0005BBA5F /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */; };
 		7F930BB81CE0213E00C000A8 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F930BB71CE0213E00C000A8 /* KDCircularProgress.swift */; };
+		7F9D71DD1CE6DA2700702928 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9D71DC1CE6DA2700702928 /* Validator.swift */; };
 		7F9EB5C11CC3256700DD8CC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EB5C01CC3256700DD8CC6 /* AppDelegate.swift */; };
 		7F9EB5C31CC3256700DD8CC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EB5C21CC3256700DD8CC6 /* ViewController.swift */; };
 		7F9EB5C61CC3256700DD8CC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9EB5C41CC3256700DD8CC6 /* Main.storyboard */; };
@@ -71,6 +72,7 @@
 		7F7FC7991CCFD638005BBA5F /* CustomCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCells.swift; path = ../Stores/CustomCells.swift; sourceTree = "<group>"; };
 		7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
 		7F930BB71CE0213E00C000A8 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
+		7F9D71DC1CE6DA2700702928 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		7F9EB5BD1CC3256700DD8CC6 /* Phonus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phonus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9EB5C01CC3256700DD8CC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F9EB5C21CC3256700DD8CC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -164,12 +166,21 @@
 		7F210CCB1CCDBC83003CC2CE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7F9D71DB1CE6DA0100702928 /* validation */,
 				7FF40E6F1CD6FEE400D4184E /* ui */,
 				7FF40E6E1CD6FED800D4184E /* audio */,
 				7FF40E6D1CD6FEBB00D4184E /* api */,
 				7FF40E6C1CD6FEB300D4184E /* json */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7F9D71DB1CE6DA0100702928 /* validation */ = {
+			isa = PBXGroup;
+			children = (
+				7F9D71DC1CE6DA2700702928 /* Validator.swift */,
+			);
+			name = validation;
 			sourceTree = "<group>";
 		};
 		7F9EB5B41CC3256700DD8CC6 = {
@@ -484,6 +495,7 @@
 				7F210CC61CCDBB02003CC2CE /* ExamDetailsViewController.swift in Sources */,
 				7F59674F1CC3281700F5D3EE /* PhonusAPIManager.swift in Sources */,
 				7F210CCD1CCDCC19003CC2CE /* ExamViewController.swift in Sources */,
+				7F9D71DD1CE6DA2700702928 /* Validator.swift in Sources */,
 				7F5E443B1CDE99E0000F0CF1 /* MenuTableViewController.swift in Sources */,
 				7F5E44351CDE8EF1000F0CF1 /* ENSideMenuNavigationController.swift in Sources */,
 				7F9EB5C11CC3256700DD8CC6 /* AppDelegate.swift in Sources */,

@@ -35,7 +35,7 @@ class ViewController: UIViewController, ENSideMenuDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.color(0, green: 51, blue: 102, alpha: 1)
+        self.view.backgroundColor = UIColor.color(0, green: 25, blue: 51, alpha: 1)
 
                 let button = CircleMenu(
                     frame: CGRect(x: 0, y: 0, width: 100, height: 100),

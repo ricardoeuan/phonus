@@ -38,7 +38,7 @@ class AudioTestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.color(0, green: 51, blue: 102, alpha: 1)
+        self.view.backgroundColor = UIColor.color(0, green: 25, blue: 51, alpha: 1)
         
         tone = AVTonePlayerUnit()
         label.text = String(format: "%.1f", tone.frequency) + " Hz"
@@ -99,12 +99,11 @@ class AudioTestViewController: UIViewController {
     
     // MARK: Send Results Confirmation
     
-    func displayConfirmationAlert() {
-        let refreshAlert = UIAlertController(title: "Confirmation", message: "Your results will be sent : " + "\(tone.frequency) Hz", preferredStyle: UIAlertControllerStyle.Alert)
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in                
-            
-            PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: 250, minFrequency: self.tone.frequency, ipAddress: "192.168.1.254", latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
-            guard result.error == nil, let successValue = result.value
+    func showConfirmationAlert() {
+        let refreshAlert = UIAlertController(title: "Confirmation", message: "Your results will be sent : " + String(format: "%.1f", tone.frequency) + " Hz", preferredStyle: UIAlertControllerStyle.Alert)
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+            PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: 250.0, minFrequency: self.tone.frequency, ipAddress: "192.168.1.254", latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
+                guard result.error == nil, let successValue = result.value
                 where successValue as! NSObject == true else {
                 if let error = result.error {
                     print(error)
@@ -118,7 +117,8 @@ class AudioTestViewController: UIViewController {
                     alertController.addAction(okAction)
                     self.presentViewController(alertController, animated:true, completion: nil)
                     return
-            }                
+            }
+                print(result.value)
             self.navigationController?.popViewControllerAnimated(true)
         })
     }))
@@ -149,6 +149,6 @@ class AudioTestViewController: UIViewController {
         asyncSliderUpdater.invalidate()
         engine.mainMixerNode.volume = 0.0
         tone.stop()
-        displayConfirmationAlert()
+        showConfirmationAlert()
     }
 }

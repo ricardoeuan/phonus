@@ -12,13 +12,15 @@ import CoreLocation
 
 class ExamViewController: FormViewController, CLLocationManagerDelegate {
     
-    var locationManager: CLLocationManager!    
+    var locationManager: CLLocationManager!
+    var validator: Validator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib. 
         
         locationManager = CLLocationManager()
+        validator = Validator(strategy:NameStrategy())
         
         // Request authorization from user
         self.locationManager.requestAlwaysAuthorization()
@@ -45,14 +47,6 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
                 $0.title = "Nombre:"
             }
             
-            <<< NameRow("secondName"){
-                $0.title = "Apellido Paterno:"
-            }
-            
-            <<< NameRow("thirdName"){
-                $0.title = "Apellido Materno:"
-            }
-            
             +++ Section()
             
             <<< SwitchRow("Verificar Ubicación"){
@@ -74,8 +68,13 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
             <<< ButtonRow() {
                 $0.title = "Continue"
                 $0.onCellSelection { cell, row in
-                    // Validate
-                    self.performSegueWithIdentifier("AudioTest", sender: nil)
+                    // 1st Validation nil
+                    if self.form.rowByTag("name")!.baseValue != nil && self.form.rowByTag("location")!.baseValue != nil {
+                        // 2nd Validation regex
+                        if self.validator.isValidString(self.form.rowByTag("name")!.baseValue as! String) {
+                            self.performSegueWithIdentifier("AudioTest", sender: nil)
+                        }
+                    }
                 }
             }
     }
@@ -97,9 +96,9 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "AudioTest") {
-            let svc = segue.destinationViewController as! AudioTestViewController;
-            svc.name = self.form.values()["name"] as! String
-            svc.location = self.form.values()["location"] as! CLLocation
+            let svc = segue.destinationViewController as! AudioTestViewController
+            svc.name = self.form.rowByTag("name")!.baseValue as! String
+            svc.location = self.form.rowByTag("location")!.baseValue as! CLLocation
         }
     }
 }

@@ -29,10 +29,10 @@ class PhonusAPIManager: NSObject {
     func postExam(name: String, maxFrequency: Double, minFrequency: Double, ipAddress: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, completionHandler: (Result<AnyObject, NSError>) -> Void) {
         
         let parameters: [String: AnyObject] = [
-            "NombreAplicante" : "\(name)",
-            "FrecuenciaMaxima" : maxFrequency,
-            "FrecuenciaMinima" : minFrequency,
-            "DireccionIp" : "\(ipAddress)",
+            "NombreAplicante" : "\"\(name)\"",
+            "FrecuenciaMaxima" : minFrequency,
+            "FrecuenciaMinima" : maxFrequency,
+            "DireccionIp" : "\"\(ipAddress)\"",
             "Latitud" : latitude,
             "Longitud" : longitude
         ]
