@@ -67,7 +67,7 @@ enum ExamRouter: URLRequestConvertible {
         let encoding = Alamofire.ParameterEncoding.JSON
         let (encodedRequest, _) = encoding.encode(URLRequest, parameters: params)
         
-        encodedRequest.HTTPMethod = method.rawValue                
+        encodedRequest.HTTPMethod = method.rawValue        
         
         return encodedRequest                
     }

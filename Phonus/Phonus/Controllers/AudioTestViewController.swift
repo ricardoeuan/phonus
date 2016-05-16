@@ -16,20 +16,24 @@ class AudioTestViewController: UIViewController {
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var label: UILabel!
     
+    @IBOutlet weak var lowButton: UIButton!
+    @IBOutlet weak var highButton: UIButton!
+    
     var engine: AVAudioEngine!
     var tone: AVTonePlayerUnit!
     var asyncSliderUpdater: NSTimer!
-    let minSliderVal:Float = -5.0       //  250 hz
-    let maxSliderVal:Float = 1.321925   //  20000 hz
+    let minSliderVal:Float = 0.0
+    let maxSliderVal:Float = 20000.0
+    
+    var ipAddress:String!
+    var isTestCompleted: Bool = false
     
     var progress: KDCircularProgress!
     
     // MARK: Shared variables from ExaViewController
     
     var name: String!
-    var location: CLLocation!
-    
-    var examParams:[String: AnyObject]!
+    var location: CLLocation!    
     
     override func viewDidAppear(animated: Bool) {
         //TEST POST operation
@@ -39,12 +43,14 @@ class AudioTestViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.color(0, green: 25, blue: 51, alpha: 1)
+        lowButton.backgroundColor = UIColor.redColor()
+        highButton.backgroundColor = UIColor.greenColor()
         
         tone = AVTonePlayerUnit()
         label.text = String(format: "%.1f", tone.frequency) + " Hz"
         slider.minimumValue = minSliderVal
         slider.maximumValue = maxSliderVal
-        slider.value = 0.0
+        slider.value = 8000.0
         
         let format = AVAudioFormat(standardFormatWithSampleRate: tone.sampleRate, channels: 1)
         
@@ -59,8 +65,14 @@ class AudioTestViewController: UIViewController {
             print(error)
         }
         
-        initCircularProgress()
+        if let ipAddress = NetworkUtils.getIPAddress() {
+            self.ipAddress = ipAddress
+        } else {
+            self.ipAddress = "127.0.0.1"
+        }
         
+        initCircularProgress()
+        startPlaying()
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,7 +85,7 @@ class AudioTestViewController: UIViewController {
     func initCircularProgress() {
         progress = KDCircularProgress(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         progress.startAngle = -90
-        progress.angle = Double((slider.value * 55.5555556) + 285)
+        progress.angle = Double(slider.value / 55.5555556)
         progress.progressThickness = 0.6
         progress.trackThickness = 0.8
         progress.clockwise = true
@@ -87,22 +99,29 @@ class AudioTestViewController: UIViewController {
         view.addSubview(progress)
     }
     
-    // MARK: Slider Control
+    // MARK: AVPlayerUnit start
+    func startPlaying() {
+        tone.preparePlaying()
+        tone.play()
+        engine.mainMixerNode.volume = 1.0
+    }
     
-    func asyncSliderUpate() {
+    // MARK: Slider Control
+    // Uncomment this function to adapt to one-touch interaction test
+    /*func asyncSliderUpate() {
         slider.value += 0.1690715383
         let freq = 8000.0 * pow(2.0, Double(slider.value))
         tone.frequency = freq
         progress.angle = Double((slider.value * 55.5555556) + 285)
         label.text = String(format: "%.1f", freq) + " Hz"
-    }
+    }*/
     
     // MARK: Send Results Confirmation
     
     func showConfirmationAlert() {
         let refreshAlert = UIAlertController(title: "Confirmation", message: "Your results will be sent : " + String(format: "%.1f", tone.frequency) + " Hz", preferredStyle: UIAlertControllerStyle.Alert)
         refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-            PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: 250.0, minFrequency: self.tone.frequency, ipAddress: "192.168.1.254", latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
+            PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
                 guard result.error == nil, let successValue = result.value
                 where successValue as! NSObject == true else {
                 if let error = result.error {
@@ -118,9 +137,32 @@ class AudioTestViewController: UIViewController {
                     self.presentViewController(alertController, animated:true, completion: nil)
                     return
             }
-                print(result.value)
+            print(result.value)
             self.navigationController?.popViewControllerAnimated(true)
         })
+            //POST without router implementation
+            /*
+            let postEndpoint: String = "https://phonus.azurewebsites.net/api/examen/Registrar"
+            let newPost: [String : AnyObject] = [
+                "NombreAplicante" : "\"\(self.name)\"",
+                "FrecuenciaMaxima" : self.tone.frequency,
+                "FrecuenciaMinima" : 250,
+                "DireccionIp" : "\(self.ipAddres)",
+                "Latitud" : self.location.coordinate.latitude,
+                "Longitud" : self.location.coordinate.longitude ]
+            Alamofire.request(.POST, postEndpoint, parameters: newPost, encoding: .JSON)
+                .responseJSON{ response in
+                    guard response.result.error == nil else {
+                        print(response.result.error)
+                        return
+                    }
+                    
+                    if let value: AnyObject = response.result.value {
+                        let post = JSON(value)
+                        print("The post is: " + post.description)
+                    }
+            }
+            self.navigationController?.popViewControllerAnimated(true)*/
     }))
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
         presentViewController(refreshAlert, animated: true, completion: nil)
@@ -137,8 +179,8 @@ class AudioTestViewController: UIViewController {
     }
     
     // MARK: UI Actions
-    
-    @IBAction func startTest(sender: AnyObject) {
+    // Uncomment below UI actions to adapt to one-touch interaction test
+    /*@IBAction func startTest(sender: AnyObject) {
         tone.preparePlaying()
         tone.play()
         engine.mainMixerNode.volume = 1.0
@@ -150,5 +192,28 @@ class AudioTestViewController: UIViewController {
         engine.mainMixerNode.volume = 0.0
         tone.stop()
         showConfirmationAlert()
+    }*/
+    
+    
+    @IBAction func increaseFrequency(sender: UIButton) {
+        if(isTestCompleted) {
+            showConfirmationAlert()
+        } else {
+            slider.value += 1000
+            let freq = Double(slider.value)
+            tone.frequency = freq
+            progress.angle = Double(slider.value / 55.5555556)
+            label.text = String(format: "%.1f", freq) + " Hz"
+        }
     }
+    
+    @IBAction func lowerFrequency(sender: UIButton) {
+        isTestCompleted = true
+        slider.value -= 100
+        let freq = Double(slider.value)
+        tone.frequency = freq
+        progress.angle = Double(slider.value / 55.5555556)
+        label.text = String(format: "%.1f", freq) + " Hz"
+    }
+    
 }

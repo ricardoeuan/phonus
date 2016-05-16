@@ -21,6 +21,7 @@
 		7F7FC7981CCFBB62005BBA5F /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F7FC7971CCFBB62005BBA5F /* Eureka.framework */; };
 		7F7FC79A1CCFD638005BBA5F /* CustomCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FC7991CCFD638005BBA5F /* CustomCells.swift */; };
 		7F7FC79C1CCFD7E0005BBA5F /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */; };
+		7F8C2C821CE960EA001BB09F /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C2C811CE960EA001BB09F /* NetworkUtils.swift */; };
 		7F930BB81CE0213E00C000A8 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F930BB71CE0213E00C000A8 /* KDCircularProgress.swift */; };
 		7F9D71DD1CE6DA2700702928 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9D71DC1CE6DA2700702928 /* Validator.swift */; };
 		7F9EB5C11CC3256700DD8CC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EB5C01CC3256700DD8CC6 /* AppDelegate.swift */; };
@@ -71,6 +72,8 @@
 		7F7FC7971CCFBB62005BBA5F /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = "Pods/../build/Debug-iphoneos/Eureka.framework"; sourceTree = "<group>"; };
 		7F7FC7991CCFD638005BBA5F /* CustomCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCells.swift; path = ../Stores/CustomCells.swift; sourceTree = "<group>"; };
 		7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
+		7F8C2C811CE960EA001BB09F /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
+		7F8C2C831CE9653E001BB09F /* Phonus-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Phonus-Bridging-Header.h"; sourceTree = "<group>"; };
 		7F930BB71CE0213E00C000A8 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		7F9D71DC1CE6DA2700702928 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		7F9EB5BD1CC3256700DD8CC6 /* Phonus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phonus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +169,7 @@
 		7F210CCB1CCDBC83003CC2CE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7F8C2C801CE960D2001BB09F /* network */,
 				7F9D71DB1CE6DA0100702928 /* validation */,
 				7FF40E6F1CD6FEE400D4184E /* ui */,
 				7FF40E6E1CD6FED800D4184E /* audio */,
@@ -173,6 +177,14 @@
 				7FF40E6C1CD6FEB300D4184E /* json */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7F8C2C801CE960D2001BB09F /* network */ = {
+			isa = PBXGroup;
+			children = (
+				7F8C2C811CE960EA001BB09F /* NetworkUtils.swift */,
+			);
+			name = network;
 			sourceTree = "<group>";
 		};
 		7F9D71DB1CE6DA0100702928 /* validation */ = {
@@ -219,6 +231,7 @@
 				7F9EB5CC1CC3256700DD8CC6 /* LaunchScreen.storyboard */,
 				7F9EB5CF1CC3256700DD8CC6 /* Info.plist */,
 				7F9EB5C71CC3256700DD8CC6 /* Phonus.xcdatamodeld */,
+				7F8C2C831CE9653E001BB09F /* Phonus-Bridging-Header.h */,
 			);
 			path = Phonus;
 			sourceTree = "<group>";
@@ -495,6 +508,7 @@
 				7F210CC61CCDBB02003CC2CE /* ExamDetailsViewController.swift in Sources */,
 				7F59674F1CC3281700F5D3EE /* PhonusAPIManager.swift in Sources */,
 				7F210CCD1CCDCC19003CC2CE /* ExamViewController.swift in Sources */,
+				7F8C2C821CE960EA001BB09F /* NetworkUtils.swift in Sources */,
 				7F9D71DD1CE6DA2700702928 /* Validator.swift in Sources */,
 				7F5E443B1CDE99E0000F0CF1 /* MenuTableViewController.swift in Sources */,
 				7F5E44351CDE8EF1000F0CF1 /* ENSideMenuNavigationController.swift in Sources */,
@@ -656,6 +670,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.itesm.Phonus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Phonus/Phonus-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -675,6 +690,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.itesm.Phonus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Phonus/Phonus-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -81,32 +83,48 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWo-OB-evp">
-                                <rect key="frame" x="277" y="550" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="Q0m-Cp-h1n"/>
-                                </constraints>
-                                <state key="normal" title="Play">
+                                <rect key="frame" x="20" y="530" width="275" height="50"/>
+                                <state key="normal" title="Low">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="endTest:" destination="CFY-Es-Zra" eventType="touchUpInside" id="Jky-iD-hTc"/>
-                                    <action selector="startTest:" destination="CFY-Es-Zra" eventType="touchDown" id="DT0-ZE-WZo"/>
+                                    <action selector="lowerFrequency:" destination="CFY-Es-Zra" eventType="touchDown" id="rol-wt-qBp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0D-Qd-Z6H">
+                                <rect key="frame" x="305" y="530" width="275" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6al-M7-KnM"/>
+                                </constraints>
+                                <state key="normal" title="High">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="increaseFrequency:" destination="CFY-Es-Zra" eventType="touchDown" id="J3V-hz-fvl"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="MWo-OB-evp" firstAttribute="leading" secondItem="7Sx-ef-RVO" secondAttribute="leadingMargin" id="3h4-AZ-Cbf"/>
                             <constraint firstItem="ik5-zM-tBo" firstAttribute="centerY" secondItem="7Sx-ef-RVO" secondAttribute="centerY" id="91F-2b-zCb"/>
+                            <constraint firstItem="MWo-OB-evp" firstAttribute="top" secondItem="Y0D-Qd-Z6H" secondAttribute="top" id="CCz-WY-pdd"/>
                             <constraint firstItem="4cT-jA-dJs" firstAttribute="centerX" secondItem="7Sx-ef-RVO" secondAttribute="centerX" id="GvF-q2-Ihs"/>
                             <constraint firstItem="4cT-jA-dJs" firstAttribute="top" secondItem="7Sx-ef-RVO" secondAttribute="top" constant="136" id="HMQ-FD-ezR"/>
+                            <constraint firstItem="MWo-OB-evp" firstAttribute="trailing" secondItem="ik5-zM-tBo" secondAttribute="trailing" constant="-58" id="Hwl-4k-plx"/>
                             <constraint firstItem="ik5-zM-tBo" firstAttribute="centerX" secondItem="4cT-jA-dJs" secondAttribute="centerX" constant="6" id="PhE-qX-rRM"/>
-                            <constraint firstItem="MWo-OB-evp" firstAttribute="centerX" secondItem="ik5-zM-tBo" secondAttribute="centerX" constant="-5.5" id="W6g-Yn-HSA"/>
-                            <constraint firstAttribute="bottom" secondItem="MWo-OB-evp" secondAttribute="bottom" constant="20" symbolic="YES" id="bkp-JX-h0C"/>
+                            <constraint firstItem="MWo-OB-evp" firstAttribute="baseline" secondItem="Y0D-Qd-Z6H" secondAttribute="firstBaseline" id="gdx-No-aBx"/>
+                            <constraint firstAttribute="bottom" secondItem="MWo-OB-evp" secondAttribute="bottom" constant="20" symbolic="YES" id="hgw-vW-VqC"/>
+                            <constraint firstItem="Y0D-Qd-Z6H" firstAttribute="leading" secondItem="ik5-zM-tBo" secondAttribute="leading" constant="47" id="ig5-eh-KNu"/>
                             <constraint firstItem="4cT-jA-dJs" firstAttribute="leading" secondItem="7Sx-ef-RVO" secondAttribute="leadingMargin" constant="10" id="oH7-5y-rZT"/>
+                            <constraint firstItem="MWo-OB-evp" firstAttribute="firstBaseline" secondItem="Y0D-Qd-Z6H" secondAttribute="baseline" id="tAE-nv-ZTT"/>
+                            <constraint firstItem="Y0D-Qd-Z6H" firstAttribute="trailing" secondItem="7Sx-ef-RVO" secondAttribute="trailingMargin" id="xPs-qB-D56"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="highButton" destination="Y0D-Qd-Z6H" id="9YM-fn-AU3"/>
                         <outlet property="label" destination="ik5-zM-tBo" id="Yje-9f-yxG"/>
+                        <outlet property="lowButton" destination="MWo-OB-evp" id="wcb-Lz-v7b"/>
                         <outlet property="slider" destination="4cT-jA-dJs" id="9QH-wJ-FGf"/>
                     </connections>
                 </viewController>
