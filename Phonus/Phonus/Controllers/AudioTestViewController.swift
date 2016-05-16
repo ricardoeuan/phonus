@@ -28,6 +28,8 @@ class AudioTestViewController: UIViewController {
     var ipAddress:String!
     var isTestCompleted: Bool = false
     
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    
     var progress: KDCircularProgress!
     
     // MARK: Shared variables from ExaViewController
@@ -43,14 +45,15 @@ class AudioTestViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.color(0, green: 25, blue: 51, alpha: 1)
-        lowButton.backgroundColor = UIColor.redColor()
-        highButton.backgroundColor = UIColor.greenColor()
+        lowButton.backgroundColor = UIColor.whiteColor()
+        highButton.backgroundColor = UIColor.whiteColor()
         
         tone = AVTonePlayerUnit()
         label.text = String(format: "%.1f", tone.frequency) + " Hz"
         slider.minimumValue = minSliderVal
         slider.maximumValue = maxSliderVal
         slider.value = 8000.0
+        slider.hidden = true
         
         let format = AVAudioFormat(standardFormatWithSampleRate: tone.sampleRate, channels: 1)
         
@@ -93,7 +96,7 @@ class AudioTestViewController: UIViewController {
         progress.roundedCorners = true
         progress.glowMode = .Forward
         //progress.setColors(UIColor.color(0, green: 245, blue: 255, alpha: 1))
-        progress.setColors(UIColor.greenColor())
+        progress.setColors(UIColor.color(0, green: 204, blue: 204, alpha: 1))
         progress.trackColor = UIColor.darkGrayColor()
         progress.center = CGPoint(x: view.center.x, y: view.center.y)
         view.addSubview(progress)
@@ -121,25 +124,30 @@ class AudioTestViewController: UIViewController {
     func showConfirmationAlert() {
         let refreshAlert = UIAlertController(title: "Confirmation", message: "Your results will be sent : " + String(format: "%.1f", tone.frequency) + " Hz", preferredStyle: UIAlertControllerStyle.Alert)
         refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-            PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
-                guard result.error == nil, let successValue = result.value
-                where successValue as! NSObject == true else {
-                if let error = result.error {
-                    print(error)
-                }
-                    let alertController = UIAlertController(title: "Could not send results",
-                        message: "Sorry, your results couldn't be sent. " +
-                        "Maybe Phonus service is down or you don't have an internet connection.",
-                        preferredStyle: .Alert)
-                        
-                    let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alertController.addAction(okAction)
-                    self.presentViewController(alertController, animated:true, completion: nil)
-                    return
+            if isConnectedToNetwork {
+                PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
+                    guard result.error == nil, let successValue = result.value
+                        where successValue as! NSObject == true else {
+                            if let error = result.error {
+                                print(error)
+                            }
+                            let alertController = UIAlertController(title: "Could not send results",
+                                message: "Sorry, your results couldn't be sent. " +
+                                "Maybe Phonus service is down.",
+                                preferredStyle: .Alert)
+                            
+                            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                            alertController.addAction(okAction)
+                            self.presentViewController(alertController, animated:true, completion: nil)
+                            return
+                    }
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+            } else {
+                // TODO: Implement
+                // There's no network connection. Store variables in userDefaults to be sent once we're connected
             }
-            print(result.value)
-            self.navigationController?.popViewControllerAnimated(true)
-        })
+        
             //POST without router implementation
             /*
             let postEndpoint: String = "https://phonus.azurewebsites.net/api/examen/Registrar"
@@ -197,6 +205,8 @@ class AudioTestViewController: UIViewController {
     
     @IBAction func increaseFrequency(sender: UIButton) {
         if(isTestCompleted) {
+            engine.mainMixerNode.volume = 0.0
+            tone.stop()
             showConfirmationAlert()
         } else {
             slider.value += 1000

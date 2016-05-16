@@ -85,7 +85,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWo-OB-evp">
                                 <rect key="frame" x="20" y="530" width="275" height="50"/>
                                 <state key="normal" title="Low">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="0.013138256761487388" blue="0.017069010201358537" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="lowerFrequency:" destination="CFY-Es-Zra" eventType="touchDown" id="rol-wt-qBp"/>
@@ -96,9 +96,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6al-M7-KnM"/>
                                 </constraints>
-                                <state key="normal" title="High">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" title="High"/>
                                 <connections>
                                     <action selector="increaseFrequency:" destination="CFY-Es-Zra" eventType="touchDown" id="J3V-hz-fvl"/>
                                 </connections>

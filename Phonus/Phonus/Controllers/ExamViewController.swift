@@ -28,7 +28,7 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
-        if CLLocationManager.locationServicesEnabled() {
+        if  isConnectedToNetwork && CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()

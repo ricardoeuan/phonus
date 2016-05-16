@@ -9,15 +9,39 @@
 import UIKit
 import CoreData
 
+var isConnectedToNetwork = false
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Observer for NW Connection
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.networkStatusChanged(_:)), name: ReachabilityStatusChangedNotification, object: nil)
+        NetworkUtils().monitorReachabilityChanges()
+        
         return true
+    }
+    
+    // Observer implementation
+    func networkStatusChanged(notification: NSNotification) {
+        let networkStatus = notification.userInfo! as NSDictionary
+        let status:String = networkStatus["Status"] as! String
+        if status == "Offline"{
+            //let alert = UIAlertController(title: "Alert", message: "A network connection it's necessary for a better user experience", preferredStyle: UIAlertControllerStyle.Alert)
+            //self.window?.rootViewController!.presentViewController(alert, animated: true, completion: nil)
+            isConnectedToNetwork = false
+            print("Device is offline")
+        }else if status == "Unknown"{
+            print("Device is Unknown")
+            //self.window?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+        } else if status.containsString("Online") {
+            isConnectedToNetwork = true
+            print("Device is Online")
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
