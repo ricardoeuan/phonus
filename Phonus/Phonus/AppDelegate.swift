@@ -75,6 +75,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     return
                             }
                             //self.navigationController?.popViewControllerAnimated(true)
+                            
+                            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                            
+                            do {  
+                                try self.managedObjectContext.executeRequest(batchDeleteRequest)
+                                
+                            } catch {
+                                print(error)
+                            }
                         })
                     }
                 //exams = results as! [NSManagedObject]                

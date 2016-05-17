@@ -36,3 +36,15 @@ class NameStrategy : ValidateStrategy{
         
     }
 }
+
+
+class ExamIdStrategy : ValidateStrategy {
+    
+    let pattern:String = "[0-9]*$"
+    
+    func isValidString(string: String) -> Bool {
+        
+        return string.rangeOfString(pattern, options: .RegularExpressionSearch) != nil
+        
+    }
+}

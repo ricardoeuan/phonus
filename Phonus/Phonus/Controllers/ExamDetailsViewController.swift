@@ -11,12 +11,17 @@ import Eureka
 
 class ExamDetailsViewController: FormViewController {
     
+    var validator: Validator!
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        validator = Validator(strategy: ExamIdStrategy())
+        
         TextRow.defaultCellUpdate = { cell, row in
             cell.textLabel?.font = UIFont.italicSystemFontOfSize(12)
         }
@@ -47,7 +52,13 @@ class ExamDetailsViewController: FormViewController {
             <<< ButtonRow() {
                 $0.title = "Buscar"
                 $0.onCellSelection { cell, row in
-                    self.loadExamDetails(self.form.values()["examenId"] as! Int)
+                    // 1st Validation nil
+                    if self.form.rowByTag("examenId")!.baseValue != nil {
+                        // 2nd Validation regex
+                        if self.validator.isValidString(String(self.form.rowByTag("examenId")!.baseValue)) {
+                            self.loadExamDetails(self.form.values()["examenId"] as! Int)
+                        }
+                    }
                 }
         }
     }
