@@ -10,6 +10,9 @@ import UIKit
 import AVFoundation
 import Foundation
 import CoreLocation
+import CoreData
+
+//var exams = [NSManagedObject]()
 
 class AudioTestViewController: UIViewController {
     
@@ -27,8 +30,6 @@ class AudioTestViewController: UIViewController {
     
     var ipAddress:String!
     var isTestCompleted: Bool = false
-    
-    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     var progress: KDCircularProgress!
     
@@ -144,8 +145,10 @@ class AudioTestViewController: UIViewController {
                     self.navigationController?.popViewControllerAnimated(true)
                 })
             } else {
-                // TODO: Implement
-                // There's no network connection. Store variables in userDefaults to be sent once we're connected
+                // TODO: Test
+                // There's no network connection. Store variables in dataModel to be sent once we're connected
+                self.storePendingExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
+                self.navigationController?.popViewControllerAnimated(true)
             }
         
             //POST without router implementation
@@ -184,6 +187,32 @@ class AudioTestViewController: UIViewController {
             jsonParams = nil
         }
         return jsonParams
+    }
+    
+    func storePendingExam(name: String, maxFrequency: Double, minFrequency: Double, ipAddress: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity =  NSEntityDescription.entityForName("Exam",
+                                                        inManagedObjectContext:managedContext)
+        
+        let exam = NSManagedObject(entity: entity!,
+                                     insertIntoManagedObjectContext: managedContext)
+        
+        exam.setValue(name, forKey: "name")
+        exam.setValue(maxFrequency, forKey: "maxFrequency")
+        exam.setValue(minFrequency, forKey: "minFrequency")
+        exam.setValue(ipAddress, forKey: "ipAddress")
+        exam.setValue(latitude, forKey: "latitude")
+        exam.setValue(longitude, forKey: "longitude")
+        
+        do {
+            try managedContext.save()
+            //exams.append(exam)
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
     }
     
     // MARK: UI Actions

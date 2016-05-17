@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    // TODO: FIX - Se esta mandando 2 veces el examen porque el status se llama 2 veces
     // Observer implementation
     func networkStatusChanged(notification: NSNotification) {
         let networkStatus = notification.userInfo! as NSDictionary
@@ -39,8 +40,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Device is Unknown")
             //self.window?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
         } else if status.containsString("Online") {
+            // Device is online, fetch and post pending exam
+            
             isConnectedToNetwork = true
-            print("Device is Online")
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let managedContext = appDelegate.managedObjectContext
+            
+            let fetchRequest = NSFetchRequest(entityName: "Exam")
+            
+            do {
+                let results = try managedContext.executeFetchRequest(fetchRequest)
+                    for result in results as! [NSManagedObject] {
+                        print(result.valueForKey("name")!)
+                        print(result.valueForKey("maxFrequency")!)
+                        print(result.valueForKey("minFrequency")!)
+                        print(result.valueForKey("ipAddress")!)
+                        print(result.valueForKey("latitude")!)
+                        print(result.valueForKey("longitude")!)
+                        PhonusAPIManager.sharedInstance.postExam(result.valueForKey("name")! as! String, maxFrequency: Double(result.valueForKey("maxFrequency")! as! NSNumber), minFrequency: 20.0, ipAddress: result.valueForKey("ipAddress")! as! String, latitude: Double(result.valueForKey("latitude")! as! NSNumber), longitude: Double(result.valueForKey("longitude")! as! NSNumber), completionHandler: { result in
+                            guard result.error == nil, let successValue = result.value
+                                where successValue as! NSObject == true else {
+                                    if let error = result.error {
+                                        print(error)
+                                    }
+                                    let alertController = UIAlertController(title: "Could not send results",
+                                        message: "Sorry, your results couldn't be sent. " +
+                                        "Maybe Phonus service is down.",
+                                        preferredStyle: .Alert)
+                                    
+                                    let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                                    alertController.addAction(okAction)
+                                    return
+                            }
+                            //self.navigationController?.popViewControllerAnimated(true)
+                        })
+                    }
+                //exams = results as! [NSManagedObject]                
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
         }
     }
 
