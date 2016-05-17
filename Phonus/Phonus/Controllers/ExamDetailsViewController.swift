@@ -30,7 +30,7 @@ class ExamDetailsViewController: FormViewController {
             <<< IntRow("examenId"){
                 $0.title = "ID de Examen:"
             }
-            +++ Section("Results")
+            +++ Section("Examen")
             <<< TextRow("Date") {
                 $0.title = "Fecha"
                 $0.disabled = true
@@ -40,11 +40,11 @@ class ExamDetailsViewController: FormViewController {
                 $0.disabled = true
             }
             <<< IntRow("MinFreq") {
-                $0.title = "Minimum Frequency"
+                $0.title = "Frecuencia Mínima"
                 $0.disabled = true
             }
             <<< IntRow("MaxFreq") {
-                $0.title = "Maximum Frequency"
+                $0.title = "Frecuencia Máxima"
                 $0.disabled = true
             }
             

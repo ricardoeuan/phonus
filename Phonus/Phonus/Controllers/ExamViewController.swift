@@ -66,7 +66,7 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
         
             +++ Section()
             <<< ButtonRow() {
-                $0.title = "Continue"
+                $0.title = "Continuar"
                 $0.onCellSelection { cell, row in
                     // 1st Validation nil
                     if self.form.rowByTag("name")!.baseValue != nil && self.form.rowByTag("location")!.baseValue != nil {

@@ -38,7 +38,7 @@ class PhonusAPIManager: NSObject {
         ]        
         
         Alamofire.request(ExamRouter.RegisterExam(parameters))
-            .responseJSON{ response in
+              .responseJSON{ response in
                 guard response.result.error == nil else {
                     print(response.result.error)
                     completionHandler(.Failure(response.result.error!))
@@ -51,7 +51,7 @@ class PhonusAPIManager: NSObject {
                 }
                 self.clearCache()
                 completionHandler(.Success(true))
-            }
+            }         
         // Response value plain format
         /*.response { (request, response, data, error) in
             guard error == nil else {

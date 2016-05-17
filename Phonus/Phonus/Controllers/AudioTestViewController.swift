@@ -123,8 +123,8 @@ class AudioTestViewController: UIViewController {
     // MARK: Send Results Confirmation
     
     func showConfirmationAlert() {
-        let refreshAlert = UIAlertController(title: "Confirmation", message: "Your results will be sent : " + String(format: "%.1f", tone.frequency) + " Hz", preferredStyle: UIAlertControllerStyle.Alert)
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+        let resultsAlert = UIAlertController(title: "Resultados", message: String(format: "%.1f", tone.frequency) + " Hz\n" + getResultsAdvice(), preferredStyle: UIAlertControllerStyle.Alert)
+        resultsAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
             if isConnectedToNetwork {
                 PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
                     guard result.error == nil, let successValue = result.value
@@ -132,9 +132,9 @@ class AudioTestViewController: UIViewController {
                             if let error = result.error {
                                 print(error)
                             }
-                            let alertController = UIAlertController(title: "Could not send results",
-                                message: "Sorry, your results couldn't be sent. " +
-                                "Maybe Phonus service is down.",
+                            let alertController = UIAlertController(title: "Error al enviar examen de Phonus",
+                                message: "Lo sentimos, tus resultados no se han podido enviar. " +
+                                "Es posible que el servicio de Phonus no esté disponible.",
                                 preferredStyle: .Alert)
                             
                             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -145,8 +145,16 @@ class AudioTestViewController: UIViewController {
                     self.navigationController?.popViewControllerAnimated(true)
                 })
             } else {
-                // TODO: Test
+                
                 // There's no network connection. Store variables in dataModel to be sent once we're connected
+                
+                let alert = UIAlertController(title: "No se ha Enviado el Examen", message: "Phonus guardará tus resultados y los enviará cuando tengas una conexión a internet.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                
                 self.storePendingExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
                 self.navigationController?.popViewControllerAnimated(true)
             }
@@ -175,8 +183,8 @@ class AudioTestViewController: UIViewController {
             }
             self.navigationController?.popViewControllerAnimated(true)*/
     }))
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
-        presentViewController(refreshAlert, animated: true, completion: nil)
+        resultsAlert.addAction(UIAlertAction(title: "Cancelar", style: .Default, handler: nil))
+        presentViewController(resultsAlert, animated: true, completion: nil)
     }
     
     func getJSONFromDictionary(params: NSDictionary) -> NSData {
@@ -212,6 +220,18 @@ class AudioTestViewController: UIViewController {
             //exams.append(exam)
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    func getResultsAdvice() -> String {
+        return tone.frequency > 16000 ? "Excelente !" : "Es recomendable que visites a tu médico"
+    }
+    
+    override func willMoveToParentViewController(parent: UIViewController?) {
+        super.willMoveToParentViewController(parent)
+        if parent == nil {
+            engine.mainMixerNode.volume = 0.0
+            tone.stop()
         }
     }
     

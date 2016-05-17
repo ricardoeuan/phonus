@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.networkStatusChanged(_:)), name: ReachabilityStatusChangedNotification, object: nil)
         NetworkUtils().monitorReachabilityChanges()
         
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge, categories: nil))
+        
         return true
     }
     
