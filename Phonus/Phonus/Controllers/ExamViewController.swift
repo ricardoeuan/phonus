@@ -43,8 +43,18 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
             +++ Section(){
                 $0.tag = "unknown_s"
             }
-            <<< NameRow("name"){
+            <<< TextFloatLabelRow("name"){
                 $0.title = "Nombre:"
+            }
+            
+            <<< IntFloatLabelRow("age"){
+                $0.title = "Edad:"
+            }
+            
+            <<< SegmentedRow<String>("gender"){
+                $0.title = "Sexo:"
+                $0.options = ["Masculino", "Femenino"]
+                $0.value = "M"
             }
             
             +++ Section()
@@ -68,12 +78,8 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
             <<< ButtonRow() {
                 $0.title = "Continuar"
                 $0.onCellSelection { cell, row in
-                    // 1st Validation nil
-                    if self.form.rowByTag("name")!.baseValue != nil && self.form.rowByTag("location")!.baseValue != nil {
-                        // 2nd Validation regex
-                        if self.validator.isValidString(self.form.rowByTag("name")!.baseValue as! String) {
-                            self.performSegueWithIdentifier("AudioTest", sender: nil)
-                        }
+                    if self.form.isValid() {
+                        self.performSegueWithIdentifier("AudioTest", sender: nil)
                     }
                 }
             }

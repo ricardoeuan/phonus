@@ -7,11 +7,45 @@
 //
 
 import UIKit
+import CoreData
 
 class MenuTableViewcontroller: UITableViewController {
+    
     var selectedMenuItem : Int = 0
+    
+    var names: [String] = ["One"]
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Fetch core data objects
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "Exam")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            for result in results as! [NSManagedObject] {
+                print(result.valueForKey("name")!)
+                print(result.valueForKey("maxFrequency")!)
+                print(result.valueForKey("minFrequency")!)
+                print(result.valueForKey("ipAddress")!)
+                print(result.valueForKey("latitude")!)
+                print(result.valueForKey("longitude")!)
+                
+                names.append(result.valueForKey("name")! as! String)
+            }
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+
         
         // Customize apperance of table view
         tableView.contentInset = UIEdgeInsetsMake(64.0, 0, 0, 0) //
@@ -39,7 +73,7 @@ class MenuTableViewcontroller: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return 4
+        return names.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -54,8 +88,13 @@ class MenuTableViewcontroller: UITableViewController {
             selectedBackgroundView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
             cell!.selectedBackgroundView = selectedBackgroundView
         }
+        //cell!.textLabel?.text = "Test \(indexPath.row+1)"
         
-        cell!.textLabel?.text = "Test \(indexPath.row+1)"
+        if names.count > 0 {
+            cell!.textLabel?.text = names[indexPath.item]
+        } else {
+          cell!.textLabel?.text = "No hay exámenes por enviar."
+        }
         
         return cell!
     }
@@ -75,7 +114,7 @@ class MenuTableViewcontroller: UITableViewController {
         selectedMenuItem = indexPath.row
         
         //Present new view controller
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
+        /*let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
         var destViewController : UIViewController
         switch (indexPath.row) {
         case 0:
@@ -92,6 +131,7 @@ class MenuTableViewcontroller: UITableViewController {
             break
         }
         sideMenuController()?.setContentViewController(destViewController)
+        */
     }
     
     

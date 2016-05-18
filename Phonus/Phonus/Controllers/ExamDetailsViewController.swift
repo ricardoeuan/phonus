@@ -55,7 +55,7 @@ class ExamDetailsViewController: FormViewController {
                     // 1st Validation nil
                     if self.form.rowByTag("examenId")!.baseValue != nil {
                         // 2nd Validation regex
-                        if self.validator.isValidString(String(self.form.rowByTag("examenId")!.baseValue)) {
+                        if self.validator.isValidField(self.form.rowByTag("examenId")!.baseValue) {
                             self.loadExamDetails(self.form.values()["examenId"] as! Int)
                         }
                     }

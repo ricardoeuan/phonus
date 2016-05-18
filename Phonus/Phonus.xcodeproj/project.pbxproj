@@ -22,6 +22,7 @@
 		7F7FC79A1CCFD638005BBA5F /* CustomCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FC7991CCFD638005BBA5F /* CustomCells.swift */; };
 		7F7FC79C1CCFD7E0005BBA5F /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */; };
 		7F8C2C821CE960EA001BB09F /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C2C811CE960EA001BB09F /* NetworkUtils.swift */; };
+		7F8EBB791CECC8CC0083E152 /* ValidationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8EBB781CECC8CC0083E152 /* ValidationUtils.swift */; };
 		7F930BB81CE0213E00C000A8 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F930BB71CE0213E00C000A8 /* KDCircularProgress.swift */; };
 		7F9D71DD1CE6DA2700702928 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9D71DC1CE6DA2700702928 /* Validator.swift */; };
 		7F9EB5C11CC3256700DD8CC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EB5C01CC3256700DD8CC6 /* AppDelegate.swift */; };
@@ -74,6 +75,7 @@
 		7F7FC79B1CCFD7E0005BBA5F /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
 		7F8C2C811CE960EA001BB09F /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
 		7F8C2C831CE9653E001BB09F /* Phonus-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Phonus-Bridging-Header.h"; sourceTree = "<group>"; };
+		7F8EBB781CECC8CC0083E152 /* ValidationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationUtils.swift; sourceTree = "<group>"; };
 		7F930BB71CE0213E00C000A8 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		7F9D71DC1CE6DA2700702928 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		7F9EB5BD1CC3256700DD8CC6 /* Phonus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phonus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				7F9D71DC1CE6DA2700702928 /* Validator.swift */,
+				7F8EBB781CECC8CC0083E152 /* ValidationUtils.swift */,
 			);
 			name = validation;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F930BB81CE0213E00C000A8 /* KDCircularProgress.swift in Sources */,
+				7F8EBB791CECC8CC0083E152 /* ValidationUtils.swift in Sources */,
 				7FDFCBD61CCD16A700B5C297 /* ExamDetails.swift in Sources */,
 				7FB87EC81CCEF51F000C2C58 /* AudioTestViewController.swift in Sources */,
 				7F5E44391CDE9994000F0CF1 /* MainNavigationController.swift in Sources */,
@@ -672,6 +676,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phonus/Phonus-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -691,6 +696,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.itesm.Phonus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phonus/Phonus-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

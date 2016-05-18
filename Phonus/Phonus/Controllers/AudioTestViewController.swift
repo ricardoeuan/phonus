@@ -152,11 +152,9 @@ class AudioTestViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 }))
-                self.presentViewController(alert, animated: true, completion: nil)
-                
                 
                 self.storePendingExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
-                self.navigationController?.popViewControllerAnimated(true)
+                self.presentViewController(alert, animated: true, completion: nil)                                
             }
         
             //POST without router implementation

@@ -45,6 +45,11 @@ class MainNavigationController: ENSideMenuNavigationController, ENSideMenuDelega
         print("sideMenuDidOpen")
     }
     
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        print("sideMenuShouldOpenSideMenu")
+        return true
+    }
+    
     /*
      // MARK: - Navigation
      

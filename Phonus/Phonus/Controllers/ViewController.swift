@@ -38,12 +38,12 @@ class ViewController: UIViewController, ENSideMenuDelegate {
         self.view.backgroundColor = UIColor.color(0, green: 25, blue: 51, alpha: 1)
 
                 let button = CircleMenu(
-                    frame: CGRect(x: 0, y: 0, width: 100, height: 100),
+                    frame: CGRect(x: 0, y: 0, width: 95, height: 95),
                     normalIcon:"icon_menu",
                     selectedIcon:"icon_close",
                     buttonsCount: 5,
                     duration: 0.3,
-                    distance: 180)
+                    distance: 160)
                 button.center = CGPoint(x: view.center.x, y: view.center.y - 50)
                 button.backgroundColor = UIColor.lightGrayColor()
                 button.layer.cornerRadius = button.frame.size.width / 2.0
