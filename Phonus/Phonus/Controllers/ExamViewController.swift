@@ -54,7 +54,6 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
             <<< SegmentedRow<String>("gender"){
                 $0.title = "Sexo:"
                 $0.options = ["Masculino", "Femenino"]
-                $0.value = "M"
             }
             
             +++ Section()
@@ -104,6 +103,9 @@ class ExamViewController: FormViewController, CLLocationManagerDelegate {
         if (segue.identifier == "AudioTest") {
             let svc = segue.destinationViewController as! AudioTestViewController
             svc.name = self.form.rowByTag("name")!.baseValue as! String
+            svc.age = self.form.rowByTag("age")!.baseValue as! Int
+            let gender = self.form.rowByTag("gender")!.baseValue as! String
+            svc.gender = gender.substringToIndex(gender.startIndex.advancedBy(1))
             svc.location = self.form.rowByTag("location")!.baseValue as! CLLocation
         }
     }

@@ -51,9 +51,9 @@ class ViewController: UIViewController, ENSideMenuDelegate {
                 view.addSubview(button)
         
         addTrackingMenuButton(75, title: "12", imageName: "total-btn.png", labelText: "Total")
-        addTrackingMenuButton(250, title: "7", imageName: "passed-btn.png", labelText: "Passed")
-        addTrackingMenuButton(425, title: "4", imageName: "failed-btn.png", labelText: "Failed")
-        addTrackingMenuButton(600, title: "2", imageName: "unsent-btn.png", labelText: "Unsent")
+        addTrackingMenuButton(250, title: "7", imageName: "passed-btn.png", labelText: "Positivos")
+        addTrackingMenuButton(425, title: "4", imageName: "failed-btn.png", labelText: "Negativos")
+        addTrackingMenuButton(600, title: "2", imageName: "unsent-btn.png", labelText: "Sin Enviar")
         
         self.sideMenuController()?.sideMenu?.delegate = self
     }

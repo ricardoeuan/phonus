@@ -32,34 +32,36 @@ class NameStrategy : ValidateStrategy{
     
     func isValidField(field: Any?) -> Bool {
         let value = field as! String
+        print(value)
         print("NameStrategy : ",value.rangeOfString(pattern, options: .RegularExpressionSearch) != nil)
         return value.rangeOfString(pattern, options: .RegularExpressionSearch) != nil
     }
 }
 
-// TODO: Implement
 // Matches any number between 1 - 120
 class AgeStrategy : ValidateStrategy {
     func isValidField(field: Any?) -> Bool {
-        print("AgeStrategy : true")
-        return true
+        let value =  field as! Int
+        print(value)
+        print(value > 0 && value < 121)
+        return value > 0 && value < 121
     }
 }
 
-// TODO: Refactor
 // is M or F
 class GenderStrategy : ValidateStrategy {
     func isValidField(field: Any?) -> Bool {
         let value = field as! String
+        print(value)
+        print(value == "Masculino" || value == "Femenino")
         return value == "Masculino" || value == "Femenino"
     }
 }
 
-// TODO: Implement
+// TODO: Implement CLLocationDegree validation
 // is between (-90, 90), (-180, 180)
 class LocationStrategy : ValidateStrategy {
     func isValidField(field: Any?) -> Bool {
-        print("LocationStrategy : true")
         return true
     }
 }

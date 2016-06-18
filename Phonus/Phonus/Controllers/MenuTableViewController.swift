@@ -13,7 +13,7 @@ class MenuTableViewcontroller: UITableViewController {
     
     var selectedMenuItem : Int = 0
     
-    var names: [String] = ["One"]
+    var names: [String] = ["Raul", "Mario"]
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -34,6 +34,8 @@ class MenuTableViewcontroller: UITableViewController {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             for result in results as! [NSManagedObject] {
                 print(result.valueForKey("name")!)
+                print(result.valueForKey("age")!)
+                print(result.valueForKey("gender")!)
                 print(result.valueForKey("maxFrequency")!)
                 print(result.valueForKey("minFrequency")!)
                 print(result.valueForKey("ipAddress")!)

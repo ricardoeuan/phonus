@@ -29,16 +29,22 @@ extension Form {
                     validator = Validator(strategy: GenderStrategy())
                 case "location":
                     validator = Validator(strategy: LocationStrategy())
+                case "Verificar Ubicación":
+                    validator = Validator(strategy: LocationStrategy())
             default:
                 validator = nil
             }
             
             if validator != nil && field.1 != nil {
                 if !validator.isValidField(field.1) {
+                    print("invalid field:", field.0)
+                    print("invalid val:", field.1)
                     isValidForm = false
                     return
                 }
             } else {
+                print("nil field:", field.0)
+                print("nil val:", field.1)
                 isValidForm = false
             }
         }

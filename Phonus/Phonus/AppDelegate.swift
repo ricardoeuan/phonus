@@ -23,13 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.networkStatusChanged(_:)), name: ReachabilityStatusChangedNotification, object: nil)
         NetworkUtils().monitorReachabilityChanges()
         
-        //Uncomment for push notification
+        //Uncomment for push notifications
         //application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge, categories: nil))
         
         return true
     }
     
-    // TODO: FIX - Se esta mandando 2 veces el examen porque el status se llama 2 veces
     // Observer implementation
     func networkStatusChanged(notification: NSNotification) {
         
@@ -62,12 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             for result in results as! [NSManagedObject] {
                 print(result.valueForKey("name")!)
+                print(result.valueForKey("age")!)
+                print(result.valueForKey("gender")!)
                 print(result.valueForKey("maxFrequency")!)
                 print(result.valueForKey("minFrequency")!)
                 print(result.valueForKey("ipAddress")!)
                 print(result.valueForKey("latitude")!)
                 print(result.valueForKey("longitude")!)
-                PhonusAPIManager.sharedInstance.postExam(result.valueForKey("name")! as! String, maxFrequency: Double(result.valueForKey("maxFrequency")! as! NSNumber), minFrequency: 20.0, ipAddress: result.valueForKey("ipAddress")! as! String, latitude: Double(result.valueForKey("latitude")! as! NSNumber), longitude: Double(result.valueForKey("longitude")! as! NSNumber), completionHandler: { result in
+                PhonusAPIManager.sharedInstance.postExam(result.valueForKey("name")! as! String, age: Int(result.valueForKey("age")! as! NSNumber), gender: result.valueForKey("gender")! as! String, maxFrequency: Double(result.valueForKey("maxFrequency")! as! NSNumber), minFrequency: 20.0, ipAddress: result.valueForKey("ipAddress")! as! String, latitude: Double(result.valueForKey("latitude")! as! NSNumber), longitude: Double(result.valueForKey("longitude")! as! NSNumber), completionHandler: { result in
                     guard result.error == nil, let successValue = result.value
                         where successValue as! NSObject == true else {
                             if let error = result.error {

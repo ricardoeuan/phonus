@@ -11,8 +11,7 @@ import AVFoundation
 import Foundation
 import CoreLocation
 import CoreData
-
-//var exams = [NSManagedObject]()
+import SwiftyJSON
 
 class AudioTestViewController: UIViewController {
     
@@ -36,6 +35,8 @@ class AudioTestViewController: UIViewController {
     // MARK: Shared variables from ExaViewController
     
     var name: String!
+    var age: Int!
+    var gender: String!
     var location: CLLocation!    
     
     override func viewDidAppear(animated: Bool) {
@@ -126,9 +127,8 @@ class AudioTestViewController: UIViewController {
         let resultsAlert = UIAlertController(title: "Resultados", message: String(format: "%.1f", tone.frequency) + " Hz\n" + getResultsAdvice(), preferredStyle: UIAlertControllerStyle.Alert)
         resultsAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
             if isConnectedToNetwork {
-                PhonusAPIManager.sharedInstance.postExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
-                    guard result.error == nil, let successValue = result.value
-                        where successValue as! NSObject == true else {
+                PhonusAPIManager.sharedInstance.postExam(self.name, age: self.age, gender: self.gender, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandler: { result in
+                    guard result.error == nil else {
                             if let error = result.error {
                                 print(error)
                             }
@@ -142,7 +142,13 @@ class AudioTestViewController: UIViewController {
                             self.presentViewController(alertController, animated:true, completion: nil)
                             return
                     }
-                    self.navigationController?.popViewControllerAnimated(true)
+                    let val = JSON(result.value!)
+                    let alert = UIAlertController(title: "Examen Registrado", message: "El ID de tu examen es " + String(val["ExamenID"].int!), preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                    }))
+                    //self.navigationController?.popViewControllerAnimated(true)
+                    self.presentViewController(alert, animated: true, completion: nil)
                 })
             } else {
                 
@@ -153,33 +159,9 @@ class AudioTestViewController: UIViewController {
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 }))
                 
-                self.storePendingExam(self.name, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
+                self.storePendingExam(self.name, age: self.age, gender: self.gender, maxFrequency: self.tone.frequency, minFrequency: 20.0, ipAddress: self.ipAddress, latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
                 self.presentViewController(alert, animated: true, completion: nil)                                
             }
-        
-            //POST without router implementation
-            /*
-            let postEndpoint: String = "https://phonus.azurewebsites.net/api/examen/Registrar"
-            let newPost: [String : AnyObject] = [
-                "NombreAplicante" : "\"\(self.name)\"",
-                "FrecuenciaMaxima" : self.tone.frequency,
-                "FrecuenciaMinima" : 250,
-                "DireccionIp" : "\(self.ipAddres)",
-                "Latitud" : self.location.coordinate.latitude,
-                "Longitud" : self.location.coordinate.longitude ]
-            Alamofire.request(.POST, postEndpoint, parameters: newPost, encoding: .JSON)
-                .responseJSON{ response in
-                    guard response.result.error == nil else {
-                        print(response.result.error)
-                        return
-                    }
-                    
-                    if let value: AnyObject = response.result.value {
-                        let post = JSON(value)
-                        print("The post is: " + post.description)
-                    }
-            }
-            self.navigationController?.popViewControllerAnimated(true)*/
     }))
         resultsAlert.addAction(UIAlertAction(title: "Cancelar", style: .Default, handler: nil))
         presentViewController(resultsAlert, animated: true, completion: nil)
@@ -195,7 +177,7 @@ class AudioTestViewController: UIViewController {
         return jsonParams
     }
     
-    func storePendingExam(name: String, maxFrequency: Double, minFrequency: Double, ipAddress: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    func storePendingExam(name: String, age: Int, gender: String, maxFrequency: Double, minFrequency: Double, ipAddress: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -212,10 +194,11 @@ class AudioTestViewController: UIViewController {
         exam.setValue(ipAddress, forKey: "ipAddress")
         exam.setValue(latitude, forKey: "latitude")
         exam.setValue(longitude, forKey: "longitude")
+        exam.setValue(age, forKey: "age")
+        exam.setValue(String(gender), forKey: "gender")
         
         do {
             try managedContext.save()
-            //exams.append(exam)
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }

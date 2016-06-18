@@ -26,7 +26,7 @@ class PhonusAPIManager: NSObject {
     }
     
     // Post Exam
-    func postExam(name: String, maxFrequency: Double, minFrequency: Double, ipAddress: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, completionHandler: (Result<AnyObject, NSError>) -> Void) {
+    func postExam(name: String, age: Int, gender: String, maxFrequency: Double, minFrequency: Double, ipAddress: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, completionHandler: (Result<AnyObject, NSError>) -> Void) {
         
         let parameters: [String: AnyObject] = [
             "NombreAplicante" : "\"\(name)\"",
@@ -34,8 +34,12 @@ class PhonusAPIManager: NSObject {
             "FrecuenciaMinima" : minFrequency,
             "DireccionIp" : "\(ipAddress)",
             "Latitud" : latitude,
-            "Longitud" : longitude
-        ]        
+            "Longitud" : longitude,
+            "Edad" : age,
+            "Sexo" : "\(gender)"
+        ]
+        
+        print(parameters)
         
         Alamofire.request(ExamRouter.RegisterExam(parameters))
               .responseJSON{ response in
@@ -47,21 +51,11 @@ class PhonusAPIManager: NSObject {
                 
                 if let value: AnyObject = response.result.value {
                     let post = JSON(value)
-                    print("The post is: " + post.description)
+                    print(post["ExamenID"].int!)
                 }
                 self.clearCache()
-                completionHandler(.Success(true))
-            }         
-        // Response value plain format
-        /*.response { (request, response, data, error) in
-            guard error == nil else {
-                print(error)
-                completionHandler(.Failure(error!))
-                return
-            }
-            self.clearCache()
-            completionHandler(.Success(true))            
-        }*/
+                completionHandler(response.result)
+        }
     }
     
     func clearCache() {
